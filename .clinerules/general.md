@@ -4,16 +4,18 @@ This project is a personal portfolio website built with Next.js, React, and Tail
 
 ## Folder Structure
 
-- `/src`: Contains the source code for the frontend.
-  - `/src/app`: Contains the pages and layouts for the application.
-    - `/src/app/page.tsx`: The main entry point for the application's UI.
-    - `/src/app/layout.tsx`: The root layout for the application.
-    - `/src/app/globals.css`: Global styles for the application.
-- `/public`: Contains static assets like images and fonts.
-- `package.json`: Defines the project's dependencies and scripts.
-- `next.config.ts`: Configuration file for Next.js.
-- `tailwind.config.ts`: Configuration file for Tailwind CSS.
-- `tsconfig.json`: Configuration file for TypeScript.
+```
+src/                  # Contains the source code for the frontend.
+├── app/              # Contains the pages and layouts for the application.
+│   ├── page.tsx      # The main entry point for the application's UI.
+│   ├── layout.tsx    # The root layout for the application.
+│   └── globals.css   # Global styles for the application.
+public/               # Contains static assets like images and fonts.
+package.json          # Defines the project's dependencies and scripts.
+next.config.ts        # Configuration file for Next.js.
+tailwind.config.ts    # Configuration file for Tailwind CSS.
+tsconfig.json         # Configuration file for TypeScript.
+```
 
 ## Libraries and Frameworks
 
