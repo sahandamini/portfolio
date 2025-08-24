@@ -1,79 +1,63 @@
-"use client";
+'use client'
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { UserPlus, LogIn, Compass, ChevronDown, FileText, Mail } from "lucide-react";
-import { useRef } from "react";
-import ContactCard from "@/components/ContactCard";
-import MyTimeline from "@/components/Timeline";
-import ClientThemeToggle from "@/components/client-theme-toggle";
-import FloatingButtons from "@/components/FloatingButtons";
+import ClientThemeToggle from '@/components/client-theme-toggle'
+import ContactCard from '@/components/ContactCard'
+import FloatingButtons from '@/components/FloatingButtons'
+import MyTimeline from '@/components/Timeline'
+import { useScrollObserver } from '@/lib/hooks/use-scroll-observer';
+import { useRef } from 'react';
+import ScrollButtons from '@/components/ScrollButtons';
 
 export default function Home() {
-  const heroSectionRef = useRef<HTMLDivElement>(null);
   const aboutSectionRef = useRef<HTMLDivElement>(null);
 
-  const scrollToAbout = () => {
-    if (aboutSectionRef.current) {
-      aboutSectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
-  const scrollToHome = () => {
-    if (heroSectionRef.current) {
-      heroSectionRef.current.scrollIntoView({ behavior: "smooth" });
-    }
-  };
+  const isAboutSectionVisible = useScrollObserver<HTMLDivElement>(
+    aboutSectionRef,
+    {
+      threshold: 0.2, // Corner buttons appear when 20% of about section is visible
+    },
+  );
 
   return (
-    <div className="flex flex-col">
-<div className="fixed top-4 left-4 z-50">
+    <div className="relative">
+      <div className="fixed top-4 left-4 z-50">
         <ClientThemeToggle />
       </div>
+
+      {/* Floating Buttons (always fixed, conditionally visible) */}
+      <FloatingButtons isAboutVisible={isAboutSectionVisible} />
+
       {/* Hero Section */}
-      <section id="hero-section" ref={heroSectionRef} className="min-h-screen flex flex-col relative p-8">
-        <div className="flex-grow flex items-center justify-center">
-          <h1 className="text-6xl md:text-8xl font-bold text-center mt-16">
-            Sahand Amini
-          </h1>
-        </div>
-        <div className="flex-grow flex items-center justify-center">
-          <FloatingButtons />
-        </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <Button
-            onClick={scrollToAbout}
-            variant="secondary"
-            className="w-16 h-16 rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="Scroll down to About Me section"
-          >
-            <ChevronDown className="h-8 w-8" />
-          </Button>
-        </div>
+      <section
+        id="hero-section"
+        className="bg-background flex min-h-screen flex-col items-center justify-center space-y-8 p-8"
+      >
+        <h1 className="text-center text-6xl font-bold md:text-8xl">
+          Sahand Amini
+        </h1>
       </section>
 
       {/* About Me Section */}
-      <section ref={aboutSectionRef} id="about" className="min-h-screen p-8 flex flex-col items-center justify-center space-y-8 relative">
-        <h2 className="text-5xl font-bold text-center">About Me</h2>
-        <div className="flex flex-col md:flex-row items-center justify-center md:justify-center space-y-8 md:space-y-0 md:space-x-8 w-full">
+      <section
+        ref={aboutSectionRef}
+        id="about"
+        className="bg-background relative z-20 flex min-h-screen flex-col items-center space-y-4 px-4"
+      >
+        <h2 className="sticky top-0 z-10 w-full bg-background py-4 text-center text-5xl font-bold">
+          About Me
+        </h2>
+        <div className="flex w-full flex-grow flex-col items-center justify-center space-y-8 md:flex-row md:space-y-0 md:space-x-8">
           <div className="flex flex-col space-y-8 md:w-1/2">
             <ContactCard />
           </div>
-          <div className="md:w-1/2 flex justify-center md:justify-center">
+          <div className="flex justify-center md:w-1/2">
             <MyTimeline />
           </div>
         </div>
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-          <Button
-            onClick={scrollToHome}
-            variant="secondary"
-            className="w-16 h-16 rounded-full flex items-center justify-center cursor-pointer"
-            aria-label="Scroll up to Hero section"
-          >
-            <ChevronDown className="h-8 w-8 rotate-180" />
-          </Button>
-        </div>
       </section>
+
+      {/* Scroll Buttons */}
+      <ScrollButtons />
     </div>
   );
 }
