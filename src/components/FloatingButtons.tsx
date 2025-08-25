@@ -10,10 +10,10 @@ export default function FloatingButtons({
 }) {
 	return (
 		<div
-			className={`fixed z-50 transition-all duration-500 ease-in-out ${
+			className={`fixed z-50 flex space-x-2 ${
 				isAboutVisible
-					? 'top-4 right-4 flex space-x-2 border-none bg-transparent p-0 backdrop-blur-none'
-					: 'bg-secondary/50 border-border bottom-48 left-1/2 inline-flex -translate-x-1/2 rounded-full border p-4 backdrop-blur-sm'
+					? 'top-4 right-4'
+					: 'bottom-48 left-1/2 -translate-x-1/2 bg-secondary/50 border-border rounded-full border p-4 backdrop-blur-sm'
 			}`}
 		>
 			<Link
@@ -21,31 +21,21 @@ export default function FloatingButtons({
 				passHref
 			>
 				<Button
-					variant={isAboutVisible ? 'outline' : 'default'}
-					size={isAboutVisible ? 'sm' : 'default'}
-					className={
-						isAboutVisible
-							? ''
-							: 'mx-2 inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-black transition-colors hover:bg-gray-100'
-					}
+					variant="default"
+					size="default"
+					className="mx-2 inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-blue-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:bg-secondary dark:text-blue-400 dark:hover:bg-secondary/80 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400"
 				>
-					<FileText
-						className={isAboutVisible ? 'mr-2 h-4 w-4' : 'mr-2 h-7 w-7'}
-					/>
+					<FileText className="mr-2 h-7 w-7 text-blue-600 dark:text-blue-400" />
 					<span>Resume</span>
 				</Button>
 			</Link>
 			<Link href="/" passHref>
 				<Button
-					variant={isAboutVisible ? 'default' : 'default'}
-					size={isAboutVisible ? 'sm' : 'default'}
-					className={
-						isAboutVisible
-							? ''
-							: 'mx-2 inline-flex cursor-pointer items-center rounded-full bg-purple-600 px-8 py-4 text-white transition-colors hover:bg-purple-700'
-					}
+					variant="default"
+					size="default"
+					className="mx-2 inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-green-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:bg-secondary dark:text-green-400 dark:hover:bg-secondary/80 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400"
 				>
-					<Mail className={isAboutVisible ? 'mr-2 h-4 w-4' : 'mr-2 h-7 w-7'} />
+					<Mail className="mr-2 h-7 w-7 text-green-600 dark:text-green-400" />
 					<span>Contact</span>
 				</Button>
 			</Link>
