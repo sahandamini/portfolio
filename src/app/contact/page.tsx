@@ -1,17 +1,63 @@
 'use client'
 
+import { zodResolver } from '@hookform/resolvers/zod'
+import { ArrowLeft, Linkedin, Mail } from 'lucide-react'
+import Link from 'next/link'
+import { useForm } from 'react-hook-form'
+import { toast } from 'sonner'
+import * as z from 'zod'
+
+import { sendEmail } from '@/app/actions'
 import ContactHeader from '@/components/ContactHeader'
 import { ThemeToggle } from '@/components/theme-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
+import {
+	Form,
+	FormControl,
+	FormField,
+	FormItem,
+	FormLabel,
+	FormMessage,
+} from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { ArrowLeft, Linkedin, Mail } from 'lucide-react'
-import Link from 'next/link'
+
+const formSchema = z.object({
+	email: z
+		.string()
+		.email({ message: 'Invalid email address' })
+		.nonempty({ message: 'Email is required' }),
+	message: z.string().nonempty({ message: 'Message is required' }),
+})
+
+type FormValues = z.infer<typeof formSchema>
 
 export default function ContactPage() {
+	const form = useForm<FormValues>({
+		resolver: zodResolver(formSchema),
+		defaultValues: {
+			email: '',
+			message: '',
+		},
+	})
+
+	async function onSubmit(values: FormValues) {
+		const formData = new FormData()
+		formData.append('email', values.email)
+		formData.append('message', values.message)
+
+		const response = await sendEmail(formData)
+
+		if (response?.error) {
+			toast.error(response.error.message || 'An unexpected error occurred')
+		} else {
+			toast.success('Message sent successfully!')
+			form.reset()
+		}
+	}
+
 	return (
 		<div className="bg-background flex min-h-screen items-center justify-center p-4">
 			<div className="absolute top-4 left-4">
@@ -19,7 +65,7 @@ export default function ContactPage() {
 			</div>
 			<Link
 				href="/"
-				className="absolute top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[17.5rem]"
+				className="absolute top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[15rem]"
 			>
 				<Button variant="outline" className="h-16 w-16 cursor-pointer">
 					<ArrowLeft className="h-16 w-16" />
@@ -62,43 +108,48 @@ export default function ContactPage() {
 					</Button>
 				</div>
 
-				<form className="space-y-6">
-					<div>
-						<Label htmlFor="name" className="mb-2 block">
-							Name
-						</Label>
-						<Input
-							id="name"
-							placeholder="Enter your name"
-							className="border border-gray-300 dark:border-gray-700"
+				<Form {...form}>
+					<form className="space-y-6" onSubmit={form.handleSubmit(onSubmit)}>
+						<FormField
+							control={form.control}
+							name="email"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Email</FormLabel>
+									<FormControl>
+										<Input placeholder="your.email@example.com" {...field} />
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
 						/>
-					</div>
-					<div>
-						<Label htmlFor="email" className="mb-2 block">
-							Email
-						</Label>
-						<Input
-							id="email"
-							type="email"
-							placeholder="Enter your email"
-							className="border border-gray-300 dark:border-gray-700"
+						<FormField
+							control={form.control}
+							name="message"
+							render={({ field }) => (
+								<FormItem>
+									<FormLabel>Message</FormLabel>
+									<FormControl>
+										<Textarea
+											placeholder="Enter your message"
+											rows={5}
+											{...field}
+										/>
+									</FormControl>
+									<FormMessage />
+								</FormItem>
+							)}
 						/>
-					</div>
-					<div>
-						<Label htmlFor="message" className="mb-2 block">
-							Message
-						</Label>
-						<Textarea
-							id="message"
-							placeholder="Enter your message"
-							rows={5}
-							className="border border-gray-300 dark:border-gray-700"
-						/>
-					</div>
-					<Button type="submit" className="w-full cursor-pointer">
-						Send <Mail className="ml-2 h-4 w-4" />
-					</Button>
-				</form>
+						<Button
+							type="submit"
+							className="w-full cursor-pointer"
+							disabled={form.formState.isSubmitting}
+						>
+							{form.formState.isSubmitting ? 'Sending...' : 'Send'}{' '}
+							<Mail className="ml-2 h-4 w-4" />
+						</Button>
+					</form>
+				</Form>
 			</Card>
 		</div>
 	)
