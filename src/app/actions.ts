@@ -2,9 +2,9 @@
 
 import { env } from '@/lib/env'
 import { RateLimiter } from '@/lib/rate-limiter'
+import { render } from '@react-email/render'
 import { headers } from 'next/headers'
 import * as React from 'react'
-import { render } from '@react-email/render'
 import { Resend } from 'resend'
 import { z } from 'zod'
 import { ContactEmail } from '../components/ContactEmail'
@@ -46,8 +46,8 @@ export async function sendEmail(formData: FormData) {
 
 	const { email, message } = parsed.data
 
-	const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
-	const subject = `New Contact Form Submission [${randomCode}]`;
+	const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase()
+	const subject = `New Contact Form Submission [${randomCode}]`
 
 	try {
 		await resend.emails.send({

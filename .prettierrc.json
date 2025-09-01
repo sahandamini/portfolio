@@ -1,17 +1,17 @@
 {
-  "singleQuote": true,
-  "semi": false,
-  "useTabs": true,
-  "plugins": [
-    "prettier-plugin-organize-imports",
-    "prettier-plugin-tailwindcss"
-  ],
-  "overrides": [
-    {
-      "files": ["*.yml", "*.yaml"],
-      "options": {
-        "useTabs": false
-      }
-    }
-  ]
+	"singleQuote": true,
+	"semi": false,
+	"useTabs": true,
+	"plugins": [
+		"prettier-plugin-organize-imports",
+		"prettier-plugin-tailwindcss"
+	],
+	"overrides": [
+		{
+			"files": ["*.yml", "*.yaml"],
+			"options": {
+				"useTabs": false
+			}
+		}
+	]
 }
