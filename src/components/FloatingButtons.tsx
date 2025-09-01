@@ -26,10 +26,12 @@ export default function FloatingButtons({
 					className={`inline-flex cursor-pointer items-center rounded-full px-8 py-4 transition-all duration-500 ease-in-out ${
 						isAboutVisible
 							? 'bg-blue-600 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-600'
-							: 'bg-white text-blue-600 hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:bg-secondary dark:text-blue-400 dark:hover:bg-secondary/80 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400'
+							: 'dark:bg-secondary dark:hover:bg-secondary/80 bg-white text-blue-600 hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:text-blue-400 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400'
 					}`}
 				>
-					<FileText className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`} />
+					<FileText
+						className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`}
+					/>
 					<span>Resume</span>
 				</Button>
 			</Link>
@@ -40,10 +42,12 @@ export default function FloatingButtons({
 					className={`inline-flex cursor-pointer items-center rounded-full px-8 py-4 transition-all duration-500 ease-in-out ${
 						isAboutVisible
 							? 'bg-green-600 text-white hover:bg-green-600 dark:bg-green-600 dark:text-white dark:hover:bg-green-600'
-							: 'bg-white text-green-600 hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:bg-secondary dark:text-green-400 dark:hover:bg-secondary/80 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400'
+							: 'dark:bg-secondary dark:hover:bg-secondary/80 bg-white text-green-600 hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:text-green-400 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400'
 					}`}
 				>
-					<Mail className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-green-600 dark:text-green-400'}`} />
+					<Mail
+						className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-green-600 dark:text-green-400'}`}
+					/>
 					<span>Contact</span>
 				</Button>
 			</Link>
