@@ -55,7 +55,9 @@ export async function sendEmail(formData: FormData) {
 			to: 'Sahand Amini <sahandportfolio@gmail.com>',
 			subject: subject,
 			replyTo: email,
-			html: await render(React.createElement(ContactEmail, { email, message })),
+			html: await render(
+				React.createElement(ContactEmail, { email, message, randomCode }),
+			),
 		})
 		return { success: true }
 	} catch (error) {
