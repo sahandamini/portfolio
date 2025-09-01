@@ -8,7 +8,8 @@ import { Card } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
-import { Linkedin, Mail } from 'lucide-react'
+import { ArrowLeft, Linkedin, Mail } from 'lucide-react'
+import Link from 'next/link'
 
 export default function ContactPage() {
 	return (
@@ -16,9 +17,17 @@ export default function ContactPage() {
 			<div className="absolute top-4 left-4">
 				<ThemeToggle />
 			</div>
+			<Link
+				href="/"
+				className="absolute top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[17.5rem]"
+			>
+				<Button variant="outline" className="h-16 w-16 cursor-pointer">
+					<ArrowLeft className="h-16 w-16" />
+				</Button>
+			</Link>
 			<ContactHeader />
 			<Card className="w-full max-w-2xl p-8 shadow-lg">
-				<div className="mb-6 flex items-center justify-between">
+				<div className="flex items-center justify-between">
 					<h1 className="text-5xl font-bold">Get In Touch</h1>
 					<Avatar className="h-24 w-24">
 						<AvatarImage src="/profile.jpg" alt="Avatar" />
@@ -26,7 +35,7 @@ export default function ContactPage() {
 					</Avatar>
 				</div>
 
-				<div className="mb-2 flex justify-start space-x-4">
+				<div className="flex justify-start space-x-4">
 					<Button
 						variant="outline"
 						size="lg"
@@ -86,7 +95,7 @@ export default function ContactPage() {
 							className="border border-gray-300 dark:border-gray-700"
 						/>
 					</div>
-					<Button type="submit" className="w-full">
+					<Button type="submit" className="w-full cursor-pointer">
 						Send <Mail className="ml-2 h-4 w-4" />
 					</Button>
 				</form>
