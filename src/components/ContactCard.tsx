@@ -47,10 +47,10 @@ const ContactCard: React.FC = () => {
 					Background
 				</h3>
 				<p className="mb-4 text-base leading-relaxed">
-					Born in New Orleans and graduated from Arizona State University. I'm
-					an experienced programmer with a passion for learning and improving. I
-					specialize in backend development but am always eager to explore the
-					latest & greatest technologies!
+					Born in New Orleans and graduated from Arizona State University.
+					I&apos;m an experienced programmer with a passion for learning and
+					improving. I specialize in backend development but am always eager to
+					explore the latest & greatest technologies!
 				</p>
 				<div className="flex justify-center space-x-6">
 					<a
