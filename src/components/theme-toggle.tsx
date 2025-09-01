@@ -24,7 +24,7 @@ export function ThemeToggle() {
   };
 
   return (
-    <div className="relative inline-flex items-center rounded-full bg-neutral-100 p-1 dark:bg-gray-800">
+    <div className="relative inline-flex items-center rounded-full bg-neutral-100 p-1 dark:bg-gray-800 w-fit h-fit flex-shrink-0">
       <div
         className="absolute h-9 w-9 rounded-full bg-purple-700 transition-all duration-300 ease-in-out dark:bg-purple-700"
         style={{ transform: getTransformValue() }}

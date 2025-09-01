@@ -23,17 +23,17 @@ export default function FloatingButtons({
 				<Button
 					variant="default"
 					size="default"
-					className="mx-2 inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-blue-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:bg-secondary dark:text-blue-400 dark:hover:bg-secondary/80 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400"
+					className="inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-blue-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:bg-secondary dark:text-blue-400 dark:hover:bg-secondary/80 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400"
 				>
 					<FileText className="mr-2 h-7 w-7 text-blue-600 dark:text-blue-400" />
 					<span>Resume</span>
 				</Button>
 			</Link>
-			<Link href="/" passHref>
+			<Link href="/contact">
 				<Button
 					variant="default"
 					size="default"
-					className="mx-2 inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-green-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:bg-secondary dark:text-green-400 dark:hover:bg-secondary/80 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400"
+					className="inline-flex cursor-pointer items-center rounded-full bg-white px-8 py-4 text-green-600 transition-all duration-500 ease-in-out hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:bg-secondary dark:text-green-400 dark:hover:bg-secondary/80 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400"
 				>
 					<Mail className="mr-2 h-7 w-7 text-green-600 dark:text-green-400" />
 					<span>Contact</span>
