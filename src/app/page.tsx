@@ -7,6 +7,7 @@ import MyTimeline from '@/components/Timeline'
 import { useScrollObserver } from '@/lib/hooks/use-scroll-observer';
 import { useRef } from 'react';
 import ScrollButtons from '@/components/ScrollButtons';
+import HeroAnimation from '@/components/HeroAnimation';
 
 export default function Home() {
   const aboutSectionRef = useRef<HTMLDivElement>(null);
@@ -32,9 +33,7 @@ export default function Home() {
         id="hero-section"
         className="bg-background flex min-h-screen flex-col items-center justify-center space-y-8 p-8"
       >
-        <h1 className="text-center text-6xl font-bold md:text-8xl">
-          Sahand Amini
-        </h1>
+        <HeroAnimation />
       </section>
 
       {/* About Me Section */}

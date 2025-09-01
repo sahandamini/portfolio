@@ -53,8 +53,8 @@
   --popover-foreground: oklch(21.5% 0 0); /* Dark Gray */
   --primary: oklch(21.5% 0 0); /* Dark Gray */
   --primary-foreground: oklch(100% 0 0); /* White */
-  --secondary: oklch(98% 0 0); /* Light Gray */
-  --secondary-foreground: oklch(21.5% 0 0); /* Dark Gray */
+  --secondary: oklch(90% 0 0); /* Slightly darker gray for better visibility */
+  --secondary-foreground: oklch(10% 0 0); /* Even darker gray for contrast */
   --muted: oklch(98% 0 0); /* Light Gray */
   --muted-foreground: oklch(35% 0 0); /* Medium Gray */
   --accent: oklch(98% 0 0); /* Light Gray */
@@ -119,4 +119,14 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: currentColor }
+}
+
+.TypeAnimation__cursor {
+  border-right: 2px solid;
+  animation: blink-caret 0.75s step-end infinite;
 }
