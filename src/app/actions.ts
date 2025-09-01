@@ -1,54 +1,64 @@
-'use server';
+'use server'
 
-import { Resend } from 'resend';
-import { z } from 'zod';
-import { RateLimiter } from '@/lib/rate-limiter';
-import { headers } from 'next/headers';
+import { env } from '@/lib/env'
+import { RateLimiter } from '@/lib/rate-limiter'
+import { headers } from 'next/headers'
+import { Resend } from 'resend'
+import { z } from 'zod'
 
-const resend = new Resend(process.env.RESEND_API_KEY);
-const rateLimiter = new RateLimiter();
+const resend = new Resend(env.RESEND_API_KEY)
+const rateLimiter = new RateLimiter()
 
 const sendEmailSchema = z.object({
-  email: z.string().email({ message: 'Invalid email address' }).nonempty({ message: 'Email is required' }),
-  message: z.string().nonempty({ message: 'Message is required' }),
-});
+	email: z
+		.string()
+		.email({ message: 'Invalid email address' })
+		.nonempty({ message: 'Email is required' }),
+	message: z.string().nonempty({ message: 'Message is required' }),
+})
 
 export async function sendEmail(formData: FormData) {
-  const headerList = await headers();
-  const ipAddress = headerList.get('x-forwarded-for') || headerList.get('x-real-ip') || '127.0.0.1';
+	const headerList = await headers()
+	const ipAddress =
+		headerList.get('x-forwarded-for') ||
+		headerList.get('x-real-ip') ||
+		'127.0.0.1'
 
-  const result = rateLimiter.consume(ipAddress);
+	const result = rateLimiter.consume(ipAddress)
 
-  if (!result.success) {
-    return { error: { message: 'Too many requests. Please try again later.' } };
-  }
+	if (!result.success) {
+		return { error: { message: 'Too many requests. Please try again later.' } }
+	}
 
-  const parsed = sendEmailSchema.safeParse({
-    email: formData.get('email'),
-    message: formData.get('message'),
-  });
+	const parsed = sendEmailSchema.safeParse({
+		email: formData.get('email'),
+		message: formData.get('message'),
+	})
 
-  if (!parsed.success) {
-    const firstErrorMessage = parsed.error.issues[0]?.message || 'Invalid form data.';
-    return { error: { message: firstErrorMessage } };
-  }
+	if (!parsed.success) {
+		const firstErrorMessage =
+			parsed.error.issues[0]?.message || 'Invalid form data.'
+		return { error: { message: firstErrorMessage } }
+	}
 
-  const { email, message } = parsed.data;
+	const { email, message } = parsed.data
 
-  try {
-    await resend.emails.send({
-      from: 'Portfolio Contact Form <onboarding@resend.dev>', // Replace with your verified Resend domain
-      to: 'sahandportfolio@gmail.com', // Your recipient email
-      subject: 'New Contact Form Submission',
-      replyTo: email,
-      html: `
-        <p>From: ${email}</p>
-        <p>Message: ${message}</p>
-      `,
-    });
-    return { success: true };
-  } catch (error) {
-    console.error('Error sending email:', error);
-    return { error: { message: 'Failed to send message. Please try again later.' } };
-  }
+	try {
+		await resend.emails.send({
+			from: 'Contact Form <hello@sahandamini.dev>',
+			to: 'Sahand Amini <sahandportfolio@gmail.com>',
+			subject: 'New Contact Form Submission',
+			replyTo: email,
+			html: `${message}`,
+		})
+		return { success: true }
+	} catch (error) {
+		return {
+			error: {
+				code: 'INTERNAL_SERVER_ERROR',
+				message: error instanceof Error ? error.message : 'Unknown error',
+				stack: error instanceof Error ? (error.stack ?? '') : '',
+			},
+		}
+	}
 }
