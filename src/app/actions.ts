@@ -3,8 +3,11 @@
 import { env } from '@/lib/env'
 import { RateLimiter } from '@/lib/rate-limiter'
 import { headers } from 'next/headers'
+import * as React from 'react'
+import { render } from '@react-email/render'
 import { Resend } from 'resend'
 import { z } from 'zod'
+import { ContactEmail } from '../components/ContactEmail'
 
 const resend = new Resend(env.RESEND_API_KEY)
 const rateLimiter = new RateLimiter()
@@ -43,13 +46,16 @@ export async function sendEmail(formData: FormData) {
 
 	const { email, message } = parsed.data
 
+	const randomCode = Math.random().toString(36).substring(2, 8).toUpperCase();
+	const subject = `New Contact Form Submission [${randomCode}]`;
+
 	try {
 		await resend.emails.send({
 			from: 'Contact Form <hello@sahandamini.dev>',
 			to: 'Sahand Amini <sahandportfolio@gmail.com>',
-			subject: 'New Contact Form Submission',
+			subject: subject,
 			replyTo: email,
-			html: `${message}`,
+			html: await render(React.createElement(ContactEmail, { email, message })),
 		})
 		return { success: true }
 	} catch (error) {
