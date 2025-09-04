@@ -84,7 +84,7 @@ export function ThemeToggle() {
 	const translateX = visualIndex * pillSize // distance from first position
 
 	return (
-		<div className="relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-full bg-neutral-100 p-1 dark:bg-gray-800">
+		<div className="border-border bg-secondary/50 relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-full border p-1 backdrop-blur-sm">
 			<div
 				ref={pillRef}
 				className="absolute top-1 left-1 h-9 w-9 transform-gpu rounded-full bg-purple-700 dark:bg-purple-700"
