@@ -34,7 +34,13 @@ export function ThemeToggle() {
 				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
 				onClick={() => setTheme('system')}
 			>
-				<Monitor className="h-[1.2rem] w-[1.2rem]" />
+				<Monitor
+					className={cn(
+						'h-[1.2rem] w-[1.2rem]',
+						// Make selected icon white (independent of resolved theme)
+						theme === 'system' && 'text-white',
+					)}
+				/>
 				<span className="sr-only">System theme</span>
 			</Button>
 			<Button
@@ -43,7 +49,12 @@ export function ThemeToggle() {
 				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
 				onClick={() => setTheme('dark')}
 			>
-				<Moon className="h-[1.2rem] w-[1.2rem]" />
+				<Moon
+					className={cn(
+						'h-[1.2rem] w-[1.2rem]',
+						theme === 'dark' && 'text-white',
+					)}
+				/>
 				<span className="sr-only">Dark theme</span>
 			</Button>
 			<Button
