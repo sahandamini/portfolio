@@ -2,32 +2,43 @@
 
 import { Monitor, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
+import { useEffect, useMemo, useState } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 
 export function ThemeToggle() {
-	const { theme, setTheme } = useTheme()
+    const { theme, setTheme } = useTheme()
+    const [mounted, setMounted] = useState(false)
 
-	const getTransformValue = () => {
-		switch (theme) {
-			case 'system':
-				return 'translateX(0px)'
-			case 'dark':
-				return 'translateX(36px)'
-			case 'light':
-				return 'translateX(72px)'
-			default:
-				return 'translateX(0px)'
-		}
-	}
+    useEffect(() => {
+        setMounted(true)
+    }, [])
 
-	return (
-		<div className="relative inline-flex h-fit w-fit flex-shrink-0 items-center rounded-full bg-neutral-100 p-1 dark:bg-gray-800">
-			<div
-				className="absolute h-9 w-9 rounded-full bg-purple-700 transition-all duration-300 ease-in-out dark:bg-purple-700"
-				style={{ transform: getTransformValue() }}
-			/>
+    // Map theme to an index for stable percent-based translation
+    const activeIndex = useMemo(() => {
+        switch (theme) {
+            case 'system':
+                return 0
+            case 'dark':
+                return 1
+            case 'light':
+                return 2
+            default:
+                return 0
+        }
+    }, [theme])
+
+    const transform = `translateX(${activeIndex * 100}%)`
+
+    return (
+        <div className="relative inline-flex h-fit w-fit flex-shrink-0 items-center rounded-full bg-neutral-100 p-1 dark:bg-gray-800 overflow-hidden">
+            <div
+                className={`absolute left-1 top-1 h-9 w-9 rounded-full bg-purple-700 dark:bg-purple-700 will-change-transform ${
+                    mounted ? 'transition-transform duration-300 ease-in-out' : 'transition-none'
+                }`}
+                style={{ transform }}
+            />
 			<Button
 				variant="ghost"
 				size="icon"
