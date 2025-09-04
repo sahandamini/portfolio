@@ -41,7 +41,7 @@ export default function Home() {
 				id="about"
 				className="bg-background relative z-20 flex min-h-screen flex-col items-center space-y-4 px-4 scroll-mt-24 md:scroll-mt-0"
 			>
-				<h2 className="bg-background sticky top-20 md:top-0 z-10 w-full py-4 text-center text-5xl font-bold">
+				<h2 className="bg-background w-full py-4 text-center text-5xl font-bold">
 					About Me
 				</h2>
 				<div className="flex w-full flex-grow flex-col items-center justify-center space-y-8 md:flex-row md:space-y-0 md:space-x-8">
