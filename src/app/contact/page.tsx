@@ -59,11 +59,12 @@ export default function ContactPage() {
 
 	return (
 		<div className="bg-background flex min-h-screen items-center justify-center p-4">
+			{/* Keep the return button visually where it was, but fix it so it stays on screen */}
 			<Link
 				href="/"
-				className="absolute top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[15rem]"
+				className="fixed top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[15rem] z-50"
 			>
-				<Button variant="outline" className="h-16 w-16 cursor-pointer">
+				<Button variant="outline" className="h-16 w-16 cursor-pointer " aria-label="Back to home">
 					<ArrowLeft className="h-16 w-16" />
 				</Button>
 			</Link>

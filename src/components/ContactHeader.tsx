@@ -10,7 +10,7 @@ export default function ContactHeader() {
             style={{ top: 'calc(env(safe-area-inset-top) + 14px)' }}
         >
             <div className="flex items-center justify-between px-4">
-                <div className="pointer-events-auto">
+                <div className="pointer-events-auto flex items-center gap-2">
                     <ClientThemeToggle />
                 </div>
                 <div className="pointer-events-auto">
