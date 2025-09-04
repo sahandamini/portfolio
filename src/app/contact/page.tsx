@@ -62,10 +62,14 @@ export default function ContactPage() {
 			{/* Keep the return button visually where it was, but fix it so it stays on screen */}
 			<Link
 				href="/"
-				className="fixed top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[15rem] z-50"
+				className="fixed z-[60] left-4 top-[calc(env(safe-area-inset-top)+80px)] md:top-1/2 md:left-1/2 md:-translate-x-[28rem] md:-translate-y-[15rem]"
 			>
-				<Button variant="outline" className="h-16 w-16 cursor-pointer " aria-label="Back to home">
-					<ArrowLeft className="h-16 w-16" />
+				<Button
+					variant="outline"
+					className="h-12 w-12 md:h-16 md:w-16 cursor-pointer"
+					aria-label="Back to home"
+				>
+					<ArrowLeft className="h-6 w-6 md:h-8 md:w-8" />
 				</Button>
 			</Link>
 			<ContactHeader />
