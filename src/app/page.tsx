@@ -21,8 +21,22 @@ export default function Home() {
 
 	return (
 		<div className="relative">
-			<div className="fixed top-4 left-4 z-50">
-				<ClientThemeToggle />
+
+			{/* Top bar aligns theme + header actions by center */}
+			<div
+				className="fixed inset-x-0 z-50"
+				style={{ top: 'calc(env(safe-area-inset-top) + 14px)' }}
+			>
+				<div className="flex items-center justify-between px-4">
+					<div className="pointer-events-auto">
+						<ClientThemeToggle />
+					</div>
+					<div className="pointer-events-auto">
+						{isAboutSectionVisible && (
+							<FloatingButtons isAboutVisible={true} mode="header" />
+						)}
+					</div>
+				</div>
 			</div>
 
 			{/* Hero Section */}
@@ -31,8 +45,8 @@ export default function Home() {
 				className="bg-background flex min-h-screen flex-col items-center justify-center space-y-8 p-8"
 			>
 				<HeroAnimation />
-				{/* Floating Buttons: in normal flow here; become fixed header when About enters view */}
-				<FloatingButtons isAboutVisible={isAboutSectionVisible} />
+				{/* Floating Buttons: in normal flow here */}
+				<FloatingButtons isAboutVisible={false} />
 			</section>
 
 			{/* About Me Section */}
