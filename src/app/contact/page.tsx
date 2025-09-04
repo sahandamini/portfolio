@@ -9,7 +9,6 @@ import * as z from 'zod'
 
 import { sendEmail } from '@/app/actions'
 import ContactHeader from '@/components/ContactHeader'
-import { ThemeToggle } from '@/components/theme-toggle'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -60,9 +59,6 @@ export default function ContactPage() {
 
 	return (
 		<div className="bg-background flex min-h-screen items-center justify-center p-4">
-			<div className="absolute top-4 left-4">
-				<ThemeToggle />
-			</div>
 			<Link
 				href="/"
 				className="absolute top-1/2 left-1/2 -translate-x-[28rem] -translate-y-[15rem]"
