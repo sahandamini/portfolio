@@ -10,34 +10,43 @@ import { useScrollObserver } from '@/lib/hooks/use-scroll-observer'
 import { useRef } from 'react'
 
 export default function Home() {
-	const aboutSectionRef = useRef<HTMLDivElement>(null)
+    const aboutSectionRef = useRef<HTMLDivElement>(null)
+    const heroButtonsRef = useRef<HTMLDivElement>(null)
 
-	const isAboutSectionVisible = useScrollObserver<HTMLDivElement>(
-		aboutSectionRef,
-		{
-			threshold: 0.2, // Corner buttons appear when 20% of about section is visible
-		},
-	)
+    // Observe the in-flow buttons. When they are about to leave the top
+    // (shrunken root via negative top margin), promote header buttons.
+    const areHeroButtonsWithinTopArea = useScrollObserver<HTMLDivElement>(
+        heroButtonsRef,
+        {
+            rootMargin: '-72px 0px 0px 0px',
+            threshold: 0,
+        },
+    )
+    const shouldShowHeaderButtons = !areHeroButtonsWithinTopArea
 
 	return (
 		<div className="relative">
 
 			{/* Top bar aligns theme + header actions by center */}
-			<div
-				className="fixed inset-x-0 z-50"
-				style={{ top: 'calc(env(safe-area-inset-top) + 14px)' }}
-			>
-				<div className="flex items-center justify-between px-4">
-					<div className="pointer-events-auto">
-						<ClientThemeToggle />
-					</div>
-					<div className="pointer-events-auto">
-						{isAboutSectionVisible && (
-							<FloatingButtons isAboutVisible={true} mode="header" />
-						)}
-					</div>
-				</div>
-			</div>
+            <div
+                className="fixed inset-x-0 z-50"
+                style={{ top: 'calc(env(safe-area-inset-top) + 14px)' }}
+            >
+                <div className="flex items-center justify-between px-4">
+                    <div className="pointer-events-auto">
+                        <ClientThemeToggle />
+                    </div>
+                    <div
+                        className={`transition-all duration-300 ease-out ${
+                            shouldShowHeaderButtons
+                                ? 'opacity-100 translate-y-0 scale-100 pointer-events-auto'
+                                : 'opacity-0 -translate-y-2 scale-95 pointer-events-none'
+                        }`}
+                    >
+                        <FloatingButtons isAboutVisible={true} mode="header" />
+                    </div>
+                </div>
+            </div>
 
 			{/* Hero Section */}
 			<section
@@ -45,8 +54,17 @@ export default function Home() {
 				className="bg-background flex min-h-screen flex-col items-center justify-center space-y-8 p-8"
 			>
 				<HeroAnimation />
-				{/* Floating Buttons: in normal flow here */}
-				<FloatingButtons isAboutVisible={false} />
+                {/* Floating Buttons: in normal flow here; observe wrapper for pin trigger */}
+                <div
+                    ref={heroButtonsRef}
+                    className={`transition-all duration-300 ease-out ${
+                        shouldShowHeaderButtons
+                            ? 'opacity-0 scale-95 pointer-events-none'
+                            : 'opacity-100 scale-100'
+                    }`}
+                >
+                    <FloatingButtons isAboutVisible={false} />
+                </div>
 			</section>
 
 			{/* About Me Section */}
