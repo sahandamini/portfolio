@@ -10,10 +10,12 @@ export default function FloatingButtons({
 }) {
 	return (
 		<div
-			className={`fixed z-50 flex space-x-2 ${
+			className={`z-50 flex space-x-2 transition-all duration-300 ease-in-out ${
+				// When the about section becomes visible, promote to a fixed header position
 				isAboutVisible
-					? 'top-4 right-4'
-					: 'bg-secondary/50 border-border bottom-48 left-1/2 -translate-x-1/2 rounded-full border p-4 backdrop-blur-sm'
+					? 'fixed top-4 right-4'
+					// Default: live in normal document flow, centered under hero content
+					: 'relative mx-auto mt-8 bg-secondary/50 border-border rounded-full border p-4 backdrop-blur-sm'
 			}`}
 		>
 			<Link

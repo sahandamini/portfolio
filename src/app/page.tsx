@@ -25,15 +25,14 @@ export default function Home() {
 				<ClientThemeToggle />
 			</div>
 
-			{/* Floating Buttons (always fixed, conditionally visible) */}
-			<FloatingButtons isAboutVisible={isAboutSectionVisible} />
-
 			{/* Hero Section */}
 			<section
 				id="hero-section"
 				className="bg-background flex min-h-screen flex-col items-center justify-center space-y-8 p-8"
 			>
 				<HeroAnimation />
+				{/* Floating Buttons: in normal flow here; become fixed header when About enters view */}
+				<FloatingButtons isAboutVisible={isAboutSectionVisible} />
 			</section>
 
 			{/* About Me Section */}
