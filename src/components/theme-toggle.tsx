@@ -58,17 +58,26 @@ export function ThemeToggle() {
 	const [visualIndex, setVisualIndex] = useState(activeIndex)
 	const raf1Ref = useRef<number | null>(null)
 	const raf2Ref = useRef<number | null>(null)
+	const timeoutRef = useRef<number | null>(null)
 	useEffect(() => {
 		const id1 = requestAnimationFrame(() => {
-			const id2 = requestAnimationFrame(() => setVisualIndex(activeIndex))
+			const id2 = requestAnimationFrame(() => {
+				// Small post-style-recalc delay helps mobile Safari smoothness
+				timeoutRef.current = window.setTimeout(
+					() => setVisualIndex(activeIndex),
+					16,
+				)
+			})
 			raf2Ref.current = id2
 		})
 		raf1Ref.current = id1
 		return () => {
 			if (raf1Ref.current !== null) cancelAnimationFrame(raf1Ref.current)
 			if (raf2Ref.current !== null) cancelAnimationFrame(raf2Ref.current)
+			if (timeoutRef.current !== null) window.clearTimeout(timeoutRef.current)
 			raf1Ref.current = null
 			raf2Ref.current = null
+			timeoutRef.current = null
 		}
 	}, [activeIndex])
 
@@ -83,9 +92,11 @@ export function ThemeToggle() {
 					transform: `translate3d(${translateX}px, 0, 0)`,
 					transition:
 						mounted && !reducedMotion
-							? 'transform 180ms cubic-bezier(0.22, 1, 0.36, 1)'
+							? 'transform 240ms cubic-bezier(0.23, 1, 0.32, 1)'
 							: 'none',
 					willChange: 'transform',
+					backfaceVisibility: 'hidden',
+					contain: 'layout paint',
 				}}
 			/>
 			<Button
