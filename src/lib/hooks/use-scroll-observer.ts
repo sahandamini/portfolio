@@ -3,10 +3,12 @@
 import { useEffect, useRef, useState } from 'react'
 
 export function useScrollObserver<T extends HTMLElement>(
-	targetRef: React.RefObject<T | null>,
-	options?: IntersectionObserverInit,
+    targetRef: React.RefObject<T | null>,
+    options?: IntersectionObserverInit,
+    initialIntersecting: boolean = true,
 ) {
-	const [isIntersecting, setIsIntersecting] = useState(false) // Ensure initial state is false
+    // Default to true so header actions don't flash visible on first paint
+    const [isIntersecting, setIsIntersecting] = useState(initialIntersecting)
 	const observerRef = useRef<IntersectionObserver | null>(null)
 
 	useEffect(() => {
