@@ -37,21 +37,19 @@ export default function ScrollButtons() {
 				</div>
 			)}
 
-			{/* Scroll Up Button (visible only at bottom, after scrolling) */}
-			{isAtBottom && hasScrolled && (
-				<div
-					className={`fixed bottom-4 left-1/2 z-50 -translate-x-1/2 transform opacity-100 transition-opacity duration-300`}
+			{/* Scroll Up Button (in normal document flow, always rendered) */}
+			<div className="flex w-full items-center justify-center py-4">
+				<Button
+					variant="secondary"
+					size="icon"
+					className="hover:bg-secondary/80 h-16 w-16 cursor-pointer rounded-full shadow-lg"
+					onClick={scrollToHero}
+					disabled={isAtTop}
+					aria-label="Scroll to top"
 				>
-					<Button
-						variant="secondary"
-						size="icon"
-						className="hover:bg-secondary/80 h-16 w-16 cursor-pointer rounded-full shadow-lg"
-						onClick={scrollToHero}
-					>
-						<ArrowUp className="h-8 w-8" />
-					</Button>
-				</div>
-			)}
+					<ArrowUp className="h-8 w-8" />
+				</Button>
+			</div>
 		</>
 	)
 }

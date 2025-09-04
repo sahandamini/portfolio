@@ -39,7 +39,7 @@ export default function Home() {
 			<section
 				ref={aboutSectionRef}
 				id="about"
-				className="bg-background relative z-20 flex min-h-screen scroll-mt-24 flex-col items-center space-y-4 px-4 pb-24 md:pb-16 lg:pb-12 md:scroll-mt-0"
+				className="bg-background relative z-20 flex min-h-screen scroll-mt-16 flex-col items-center space-y-4 px-4 md:scroll-mt-0"
 			>
 				<h2 className="bg-background w-full py-4 text-center text-5xl font-bold">
 					About Me
