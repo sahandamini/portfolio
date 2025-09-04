@@ -5,7 +5,7 @@ import { useScrollPosition } from '@/lib/hooks/use-scroll-position'
 import { ArrowDown, ArrowUp } from 'lucide-react'
 
 export default function ScrollButtons() {
-	const { isAtTop, isAtBottom, hasScrolled } = useScrollPosition()
+	const { isAtTop, hasScrolled } = useScrollPosition()
 
 	const scrollToHero = () => {
 		console.log('Scroll Up button clicked')

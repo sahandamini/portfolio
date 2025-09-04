@@ -66,7 +66,7 @@ export default function ContactPage() {
 			>
 				<Button
 					variant="secondary"
-					className="border-border h-12 w-12 cursor-pointer border bg-white/90 text-gray-900 shadow-md backdrop-blur-md md:h-16 md:w-16 dark:bg-gray-900/90 dark:text-white"
+					className="border-border bg-card text-card-foreground h-12 w-12 cursor-pointer border shadow-md md:h-16 md:w-16"
 					aria-label="Back to home"
 				>
 					<ArrowLeft className="h-6 w-6 md:h-8 md:w-8" />
