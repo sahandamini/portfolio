@@ -9,6 +9,7 @@ import * as z from 'zod'
 
 import { sendEmail } from '@/app/actions'
 import ContactHeader from '@/components/ContactHeader'
+import EmailSnippet from '@/components/EmailSnippet'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Button } from '@/components/ui/button'
 import { Card } from '@/components/ui/card'
@@ -89,16 +90,6 @@ export default function ContactPage() {
 						asChild
 						className="bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50"
 					>
-						<a href="mailto:sahandaamini@gmail.com">
-							<Mail className="h-5 w-5" />
-						</a>
-					</Button>
-					<Button
-						variant="outline"
-						size="lg"
-						asChild
-						className="bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50"
-					>
 						<a
 							href="https://www.linkedin.com/in/sahandamini/"
 							target="_blank"
@@ -107,6 +98,17 @@ export default function ContactPage() {
 							<Linkedin className="h-5 w-5" />
 						</a>
 					</Button>
+					<Button
+						variant="outline"
+						size="lg"
+						asChild
+						className="bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+					>
+						<a href="mailto:sahandaamini@gmail.com">
+							<Mail className="h-5 w-5" />
+						</a>
+					</Button>
+					<EmailSnippet email="sahandaamini@gmail.com" className="max-w-xs" />
 				</div>
 
 				<Form {...form}>
