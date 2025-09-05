@@ -24,7 +24,7 @@ export const EmailSnippet: React.FC<EmailSnippetProps> = ({
 	return (
 		<div
 			className={cn(
-				'relative flex w-fit items-center justify-between rounded-md border bg-white px-3 py-2 text-sm text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50',
+				'relative flex w-fit items-center justify-between rounded-md border bg-white px-3 py-2 text-sm text-gray-800 dark:bg-gray-700 dark:text-gray-100',
 				className,
 			)}
 		>
