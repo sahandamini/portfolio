@@ -18,10 +18,7 @@ export default function FloatingButtons({
 					: 'bg-secondary/50 border-border relative mx-auto mt-8 rounded-full border p-4 backdrop-blur-sm'
 			}`}
 		>
-			<Link
-				href="https://drive.google.com/file/d/1BT1yYVTMimJOUFHBXF3dzm9Jf02hMGSV/view?usp=sharing"
-				passHref
-			>
+			<Link href="/resume.pdf">
 				<Button
 					variant="default"
 					size="default"

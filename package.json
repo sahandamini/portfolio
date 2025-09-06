@@ -4,7 +4,8 @@
 	"private": true,
 	"scripts": {
 		"dev": "next dev --turbopack",
-		"build": "next build",
+		"build": "(curl -L -o public/resume.pdf \"$RESUME_URL\" || echo 'Using committed resume.pdf as fallback') && next build",
+		"build:local": "(curl -L -o public/resume.pdf https://github.com/sahandamini/portfolio/releases/download/latest/Amini_Sahand_Resume.pdf || echo 'Using committed resume.pdf as fallback') && next build",
 		"start": "next start",
 		"lint": "next lint",
 		"format": "prettier --check . --ignore-unknown",
