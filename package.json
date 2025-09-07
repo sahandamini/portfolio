@@ -2,7 +2,7 @@
 	"name": "@sahandamini/portfolio",
 	"version": "0.1.0",
 	"private": true,
-	"packageManager": "pnpm@10.12.4",
+	"packageManager": "pnpm@10.15.1",
 	"scripts": {
 		"dev": "next dev --turbopack",
 		"build": "(curl -L -o public/resume.pdf \"$RESUME_URL\" || echo 'Using committed resume.pdf as fallback') && next build",
