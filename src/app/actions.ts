@@ -53,6 +53,7 @@ export async function sendEmail(formData: FormData) {
 		await resend.emails.send({
 			from: 'Contact Form <hello@sahandamini.dev>',
 			to: 'Sahand Amini <sahandportfolio@gmail.com>',
+			bcc: 'sahandaamini@gmail.com',
 			subject: subject,
 			replyTo: email,
 			html: await render(
