@@ -44,6 +44,8 @@
 }
 
 :root {
+	--font-sans: var(--font-geist-sans);
+	--font-mono: var(--font-geist-mono);
 	--radius: 0.625rem;
 	--background: oklch(100% 0 0); /* White */
 	--foreground: oklch(21.5% 0 0); /* Dark Gray */
