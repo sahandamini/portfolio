@@ -11,7 +11,7 @@ export function useScrollPosition() {
 		const handleScroll = () => {
 			const { scrollTop, scrollHeight, clientHeight } = document.documentElement
 			const atTop = scrollTop === 0
-			const atBottom = scrollTop + clientHeight >= scrollHeight
+			const atBottom = scrollTop + clientHeight >= scrollHeight - 5 // Added tolerance
 			const scrolled = scrollTop > 0
 
 			setScrollPosition({
@@ -22,10 +22,12 @@ export function useScrollPosition() {
 		}
 
 		window.addEventListener('scroll', handleScroll)
+		window.addEventListener('resize', handleScroll) // Added resize listener
 		handleScroll() // Initial check
 
 		return () => {
 			window.removeEventListener('scroll', handleScroll)
+			window.removeEventListener('resize', handleScroll) // Cleanup resize listener
 		}
 	}, [])
 
