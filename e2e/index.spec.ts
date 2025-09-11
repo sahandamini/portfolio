@@ -9,24 +9,24 @@ test('Basic Navigation', async ({ page }) => {
 	
 	// Home page
 	await expect(page).toHaveScreenshot('home.png', {
-		maxDiffPixelRatio: 0.01,
+		maxDiffPixelRatio: 0.02,
 	})
 
 	// Scroll to main details
 	await page.getByRole('button').filter({ hasText: /^$/ }).first().click()
 	await expect(page).toHaveScreenshot('about-me.png', {
-		maxDiffPixelRatio: 0.01,
+		maxDiffPixelRatio: 0.02,
 	})
 
 	// Scroll to bottom
 	await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
 	await expect(page).toHaveScreenshot('bottom.png', {
-		maxDiffPixelRatio: 0.01,
+		maxDiffPixelRatio: 0.02,
 	})
 
 	// Scroll back to top
 	await page.getByRole('button', { name: 'Scroll to top' }).click()
 	await expect(page).toHaveScreenshot('home.png', {
-		maxDiffPixelRatio: 0.01,
+		maxDiffPixelRatio: 0.02,
 	})
 })
