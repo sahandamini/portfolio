@@ -83,7 +83,7 @@ export default function ContactPage() {
 					</Avatar>
 				</div>
 
-				<div className="flex justify-start space-x-4">
+				<div className="flex flex-wrap items-center gap-4">
 					<Button
 						variant="outline"
 						size="lg"
