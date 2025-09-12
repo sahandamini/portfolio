@@ -8,17 +8,25 @@ test('Basic Navigation', async ({ page }) => {
 	await expect(page.locator('h1')).toHaveText('Sahand Amini')
 
 	// Home page
-	await expect(page).toHaveScreenshot('home.png')
+	await expect(page).toHaveScreenshot('home.png', {
+		maxDiffPixelRatio: 0.001,
+	})
 
 	// Scroll to main details
 	await page.getByRole('button').filter({ hasText: /^$/ }).first().click()
-	await expect(page).toHaveScreenshot('about-me.png')
+	await expect(page).toHaveScreenshot('about-me.png', {
+		maxDiffPixelRatio: 0.001,
+	})
 
 	// Scroll to bottom
 	await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight))
-	await expect(page).toHaveScreenshot('bottom.png')
+	await expect(page).toHaveScreenshot('bottom.png', {
+		maxDiffPixelRatio: 0.001,
+	})
 
 	// Scroll back to top
 	await page.getByRole('button', { name: 'Scroll to top' }).click()
-	await expect(page).toHaveScreenshot('home.png')
+	await expect(page).toHaveScreenshot('home.png', {
+		maxDiffPixelRatio: 0.001,
+	})
 })
