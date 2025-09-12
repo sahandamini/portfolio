@@ -88,24 +88,24 @@ export default function ContactPage() {
 						variant="outline"
 						size="lg"
 						asChild
-						className="bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+						className="group border-[#0a66c2]/40 text-foreground hover:bg-[#0a66c2]/5 hover:text-[#0a66c2] dark:border-[#0a66c2]/50 dark:hover:bg-[#0a66c2]/10"
 					>
 						<a
 							href="https://www.linkedin.com/in/sahandamini/"
 							target="_blank"
 							rel="noopener noreferrer"
 						>
-							<Linkedin className="h-5 w-5" />
+							<Linkedin className="h-5 w-5 transition-colors group-hover:text-[#0a66c2]" />
 						</a>
 					</Button>
 					<Button
 						variant="outline"
 						size="lg"
 						asChild
-						className="bg-white text-gray-800 dark:bg-gray-700 dark:text-gray-100 dark:hover:bg-gray-600 dark:hover:text-gray-50"
+						className="group border-indigo-500/40 text-foreground hover:bg-indigo-50 dark:border-indigo-500/50 dark:hover:bg-indigo-500/10"
 					>
 						<a href="mailto:sahandaamini@gmail.com">
-							<Mail className="h-5 w-5" />
+							<Mail className="h-5 w-5 transition-colors group-hover:text-indigo-600 dark:group-hover:text-indigo-400" />
 						</a>
 					</Button>
 					<EmailSnippet email="sahandaamini@gmail.com" className="max-w-xs" />

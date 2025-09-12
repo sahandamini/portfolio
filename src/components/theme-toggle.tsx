@@ -84,10 +84,10 @@ export function ThemeToggle() {
 	const translateX = visualIndex * pillSize // distance from first position
 
 	return (
-		<div className="border-border bg-secondary/50 relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-full border p-1 backdrop-blur-sm">
+		<div className="relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-full border border-border/70 bg-background/40 p-0.5 shadow-xs backdrop-blur-md">
 			<div
 				ref={pillRef}
-				className="absolute top-1 left-1 h-9 w-9 transform-gpu rounded-full bg-purple-700 dark:bg-purple-700"
+				className="absolute left-0.5 top-0.5 h-9 w-9 transform-gpu rounded-full bg-indigo-600 ring-1 ring-white/20 shadow-sm dark:bg-indigo-500"
 				style={{
 					transform: `translate3d(${translateX}px, 0, 0)`,
 					transition:
@@ -102,12 +102,12 @@ export function ThemeToggle() {
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 rounded-full hover:bg-transparent active:scale-95 dark:hover:bg-transparent"
 				onClick={() => setTheme('system')}
 			>
 				<Monitor
 					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
+						'h-[1.1rem] w-[1.1rem] text-muted-foreground',
 						// Make selected icon white (independent of resolved theme)
 						theme === 'system' && 'text-white',
 					)}
@@ -117,12 +117,12 @@ export function ThemeToggle() {
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 rounded-full hover:bg-transparent active:scale-95 dark:hover:bg-transparent"
 				onClick={() => setTheme('dark')}
 			>
 				<Moon
 					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
+						'h-[1.1rem] w-[1.1rem] text-muted-foreground',
 						theme === 'dark' && 'text-white',
 					)}
 				/>
@@ -131,12 +131,12 @@ export function ThemeToggle() {
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 rounded-full hover:bg-transparent active:scale-95 dark:hover:bg-transparent"
 				onClick={() => setTheme('light')}
 			>
 				<Sun
 					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
+						'h-[1.1rem] w-[1.1rem] text-muted-foreground',
 						theme === 'light' && 'text-white',
 					)}
 				/>

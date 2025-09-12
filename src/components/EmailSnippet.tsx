@@ -24,7 +24,7 @@ export const EmailSnippet: React.FC<EmailSnippetProps> = ({
 	return (
 		<div
 			className={cn(
-				'relative flex w-fit items-center justify-between rounded-md border bg-white px-3 py-2 text-sm text-gray-800 dark:bg-gray-700 dark:text-gray-100',
+				'relative flex w-fit items-center justify-between rounded-md border border-border bg-background/60 px-3 py-2 text-sm text-foreground shadow-xs backdrop-blur dark:bg-background/40',
 				className,
 			)}
 		>
@@ -39,9 +39,9 @@ export const EmailSnippet: React.FC<EmailSnippetProps> = ({
 				aria-label="Copy email to clipboard"
 			>
 				{isCopied ? (
-					<Check className="h-4 w-4 text-green-500" />
+					<Check className="h-4 w-4 text-indigo-600 dark:text-indigo-400" />
 				) : (
-					<Copy className="h-4 w-4" />
+					<Copy className="h-4 w-4 text-muted-foreground" />
 				)}
 			</Button>
 		</div>

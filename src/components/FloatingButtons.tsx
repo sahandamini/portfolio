@@ -1,6 +1,7 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
+import ButtonNeon from '@/components/ui/neon-button'
 import { FileText, Mail } from 'lucide-react'
 import Link from 'next/link'
 export default function FloatingButtons({
@@ -12,46 +13,80 @@ export default function FloatingButtons({
 }) {
 	return (
 		<div
-			className={`z-50 flex space-x-2 transition-all duration-300 ease-in-out ${
-				mode === 'header'
-					? ''
-					: 'bg-secondary/50 border-border relative mx-auto mt-8 rounded-full border p-4 backdrop-blur-sm'
+			className={`z-50 transition-all duration-300 ease-in-out ${
+				mode === 'header' ? '' : 'relative mx-auto mt-8 max-w-max'
 			}`}
 		>
-			<Button
-				asChild
-				variant="default"
-				size="default"
-				className={`inline-flex cursor-pointer items-center rounded-full px-8 py-4 transition-all duration-500 ease-in-out ${
-					isAboutVisible
-						? 'bg-blue-600 text-white hover:bg-blue-600 dark:bg-blue-600 dark:text-white dark:hover:bg-blue-600'
-						: 'dark:bg-secondary dark:hover:bg-secondary/80 bg-white text-blue-600 hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:text-blue-400 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400'
-				}`}
-			>
-				<Link href="/resume.pdf" rel="noopener noreferrer" target="_blank">
-					<FileText
-						className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`}
-					/>
-					<span>Resume</span>
-				</Link>
-			</Button>
-			<Button
-				asChild
-				variant="default"
-				size="default"
-				className={`inline-flex cursor-pointer items-center rounded-full px-8 py-4 transition-all duration-500 ease-in-out ${
-					isAboutVisible
-						? 'bg-green-600 text-white hover:bg-green-600 dark:bg-green-600 dark:text-white dark:hover:bg-green-600'
-						: 'dark:bg-secondary dark:hover:bg-secondary/80 bg-white text-green-600 hover:bg-white hover:text-green-600 hover:ring-2 hover:ring-green-500 dark:text-green-400 dark:hover:text-green-400 dark:hover:ring-2 dark:hover:ring-green-400'
-				}`}
-			>
-				<Link href="/contact">
-					<Mail
-						className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-green-600 dark:text-green-400'}`}
-					/>
-					<span>Contact</span>
-				</Link>
-			</Button>
+			{/* Fancy outer gradient ring (only in flow mode) */}
+			{mode === 'header' ? (
+				<div className="flex items-center gap-2">
+					{/* Resume */}
+					<ButtonNeon
+						asChild
+						size="default"
+						className="group inline-flex items-center rounded-full"
+					>
+						<Link href="/resume.pdf" rel="noopener noreferrer" target="_blank">
+							<FileText className="mr-2 h-5 w-5 transition-all group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:text-white" />
+							<span className="relative transition-colors group-hover:text-white">
+								Resume
+							</span>
+						</Link>
+					</ButtonNeon>
+
+					{/* Contact */}
+					<ButtonNeon
+						asChild
+						size="default"
+						className="group inline-flex items-center rounded-full"
+					>
+						<Link href="/contact">
+							<Mail className="mr-2 h-5 w-5 transition-all group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:text-white" />
+							<span className="relative transition-colors group-hover:text-white">
+								Contact
+							</span>
+						</Link>
+					</ButtonNeon>
+				</div>
+			) : (
+				<div className="border-border/70 bg-background/60 dark:bg-background/40 inline-flex items-center gap-0.5 rounded-full border px-0.5 py-0.5 shadow-xs backdrop-blur-md">
+					<Button
+						asChild
+						variant="ghost"
+						size="default"
+						className={`group inline-flex items-center rounded-full bg-transparent px-4 py-2.5 font-medium transition-all hover:bg-blue-50/60 active:scale-95 dark:hover:bg-blue-500/10 ${
+							isAboutVisible ? 'ring-1 ring-blue-500/20' : ''
+						}`}
+					>
+						<Link href="/resume.pdf" rel="noopener noreferrer" target="_blank">
+							<FileText
+								className={`text-muted-foreground/90 mr-2 h-5 w-5 transition-all group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:text-blue-600 dark:group-hover:text-blue-400`}
+							/>
+							<span className="text-foreground relative transition-colors group-hover:text-blue-700 dark:group-hover:text-blue-300">
+								Resume
+							</span>
+						</Link>
+					</Button>
+					<div className="bg-border/50 mx-0.5 h-4 w-px" aria-hidden="true" />
+					<Button
+						asChild
+						variant="ghost"
+						size="default"
+						className={`group inline-flex items-center rounded-full bg-transparent px-4 py-2.5 font-medium transition-all hover:bg-indigo-50/60 active:scale-95 dark:hover:bg-indigo-500/10 ${
+							isAboutVisible ? 'ring-1 ring-indigo-500/20' : ''
+						}`}
+					>
+						<Link href="/contact">
+							<Mail
+								className={`text-muted-foreground/90 mr-2 h-5 w-5 transition-all group-hover:-translate-y-0.5 group-hover:scale-105 group-hover:text-indigo-600 dark:group-hover:text-indigo-400`}
+							/>
+							<span className="text-foreground relative transition-colors group-hover:text-indigo-700 dark:group-hover:text-indigo-300">
+								Contact
+							</span>
+						</Link>
+					</Button>
+				</div>
+			)}
 		</div>
 	)
 }
