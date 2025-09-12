@@ -28,7 +28,7 @@ export default function FloatingButtons({
 						: 'dark:bg-secondary dark:hover:bg-secondary/80 bg-white text-blue-600 hover:bg-white hover:text-blue-600 hover:ring-2 hover:ring-blue-500 dark:text-blue-400 dark:hover:text-blue-400 dark:hover:ring-2 dark:hover:ring-blue-400'
 				}`}
 			>
-				<Link href="/resume.pdf">
+				<Link href="/resume.pdf" rel="noopener noreferrer" target="_blank">
 					<FileText
 						className={`mr-2 h-7 w-7 ${isAboutVisible ? 'text-white' : 'text-blue-600 dark:text-blue-400'}`}
 					/>
