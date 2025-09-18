@@ -8,9 +8,9 @@
 	"editor.formatOnSave": true,
 	"editor.rulers": [80],
 	"editor.defaultFormatter": "esbenp.prettier-vscode",
-	"editor.tabSize": 2,
 	"editor.codeActionsOnSave": {
-		"source.fixAll.eslint": "explicit"
+		"source.fixAll.eslint": "explicit",
+		"source.organizeImports": "always"
 	},
 	"typescript.preferences.importModuleSpecifier": "non-relative",
 	"[markdown]": {
@@ -22,6 +22,6 @@
 		"*.css": "tailwindcss"
 	},
 	"editor.quickSuggestions": {
-		"strings": true
+		"strings": "on"
 	}
 }
