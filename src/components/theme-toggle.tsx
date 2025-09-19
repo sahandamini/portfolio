@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import { Monitor, Moon, Sun } from 'lucide-react'
 import { useTheme } from 'next-themes'
 import { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react'
@@ -84,15 +85,20 @@ export function ThemeToggle() {
 	const translateX = visualIndex * pillSize // distance from first position
 
 	return (
-		<div className="border-border bg-secondary/50 relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-full border p-1 backdrop-blur-sm">
-			<div
+		<motion.div 
+			initial={{ opacity: 0, scale: 0.8 }}
+			animate={{ opacity: 1, scale: 1 }}
+			transition={{ duration: 0.5, ease: "easeOut" }}
+			className="glass-effect relative inline-flex h-fit w-fit flex-shrink-0 items-center overflow-hidden rounded-2xl border p-2 shadow-lg"
+		>
+			<motion.div
 				ref={pillRef}
-				className="absolute top-1 left-1 h-9 w-9 transform-gpu rounded-full bg-purple-700 dark:bg-purple-700"
+				className="absolute top-2 left-2 h-10 w-10 transform-gpu rounded-xl bg-gradient-to-br from-purple-600 to-pink-600 shadow-lg"
 				style={{
 					transform: `translate3d(${translateX}px, 0, 0)`,
 					transition:
 						mounted && !reducedMotion
-							? 'transform 240ms cubic-bezier(0.23, 1, 0.32, 1)'
+							? 'transform 300ms cubic-bezier(0.23, 1, 0.32, 1)'
 							: 'none',
 					willChange: 'transform',
 					backfaceVisibility: 'hidden',
@@ -102,46 +108,61 @@ export function ThemeToggle() {
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 h-10 w-10 rounded-xl hover:bg-transparent dark:hover:bg-transparent transition-all duration-200"
 				onClick={() => setTheme('system')}
 			>
-				<Monitor
-					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
-						// Make selected icon white (independent of resolved theme)
-						theme === 'system' && 'text-white',
-					)}
-				/>
+				<motion.div
+					whileHover={{ scale: 1.1 }}
+					whileTap={{ scale: 0.9 }}
+				>
+					<Monitor
+						className={cn(
+							'h-5 w-5 transition-colors duration-200',
+							// Make selected icon white (independent of resolved theme)
+							theme === 'system' ? 'text-white' : 'text-muted-foreground hover:text-foreground',
+						)}
+					/>
+				</motion.div>
 				<span className="sr-only">System theme</span>
 			</Button>
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 h-10 w-10 rounded-xl hover:bg-transparent dark:hover:bg-transparent transition-all duration-200"
 				onClick={() => setTheme('dark')}
 			>
-				<Moon
-					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
-						theme === 'dark' && 'text-white',
-					)}
-				/>
+				<motion.div
+					whileHover={{ scale: 1.1 }}
+					whileTap={{ scale: 0.9 }}
+				>
+					<Moon
+						className={cn(
+							'h-5 w-5 transition-colors duration-200',
+							theme === 'dark' ? 'text-white' : 'text-muted-foreground hover:text-foreground',
+						)}
+					/>
+				</motion.div>
 				<span className="sr-only">Dark theme</span>
 			</Button>
 			<Button
 				variant="ghost"
 				size="icon"
-				className="relative z-10 rounded-full hover:bg-transparent dark:hover:bg-transparent"
+				className="relative z-10 h-10 w-10 rounded-xl hover:bg-transparent dark:hover:bg-transparent transition-all duration-200"
 				onClick={() => setTheme('light')}
 			>
-				<Sun
-					className={cn(
-						'h-[1.2rem] w-[1.2rem]',
-						theme === 'light' && 'text-white',
-					)}
-				/>
+				<motion.div
+					whileHover={{ scale: 1.1 }}
+					whileTap={{ scale: 0.9 }}
+				>
+					<Sun
+						className={cn(
+							'h-5 w-5 transition-colors duration-200',
+							theme === 'light' ? 'text-white' : 'text-muted-foreground hover:text-foreground',
+						)}
+					/>
+				</motion.div>
 				<span className="sr-only">Light theme</span>
 			</Button>
-		</div>
+		</motion.div>
 	)
 }

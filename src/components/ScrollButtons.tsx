@@ -1,5 +1,6 @@
 'use client'
 
+import { motion, AnimatePresence } from 'framer-motion'
 import { Button } from '@/components/ui/button'
 import { useScrollPosition } from '@/lib/hooks/use-scroll-position'
 import { ArrowDown, ArrowUp } from 'lucide-react'
@@ -22,41 +23,60 @@ export default function ScrollButtons() {
 	return (
 		<>
 			{/* Scroll Down Button (visible only at top, not scrolled) */}
-			{isAtTop && !hasScrolled && (
-				<div
-					className={`fixed bottom-4 left-1/2 z-50 -translate-x-1/2 transform opacity-100 transition-opacity duration-300`}
-				>
-					<Button
-						variant="secondary"
-						size="icon"
-						className="hover:bg-secondary/80 h-16 w-16 cursor-pointer rounded-full shadow-lg"
-						onClick={scrollToAbout}
+			<AnimatePresence>
+				{isAtTop && !hasScrolled && (
+					<motion.div
+						initial={{ opacity: 0, y: 20, scale: 0.8 }}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={{ opacity: 0, y: 20, scale: 0.8 }}
+						transition={{ type: "spring", stiffness: 300, damping: 30 }}
+						className="fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform"
 					>
-						<ArrowDown className="h-8 w-8" />
-					</Button>
-				</div>
-			)}
+						<motion.div
+							animate={{ y: [0, -8, 0] }}
+							transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+						>
+							<Button
+								variant="secondary"
+								size="icon"
+								className="glass-effect h-16 w-16 cursor-pointer rounded-full shadow-2xl hover:shadow-purple-500/25 border-purple-500/20 hover:border-purple-500/40 transition-all duration-300"
+								onClick={scrollToAbout}
+							>
+								<ArrowDown className="h-8 w-8 text-purple-400" />
+							</Button>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 
-			{/* Scroll Up Button (visible when scrolled, fixed position) */}
-			{/* Scroll Up Button (visible when scrolled and not at bottom, fixed position) */}
-			{/* Scroll Up Button (visible when scrolled, fixed position) */}
 			{/* Scroll Up Button (visible only at bottom, fixed position) */}
-			{isAtBottom && (
-				<div
-					className={`fixed bottom-4 left-1/2 z-50 -translate-x-1/2 transform opacity-100 transition-opacity duration-300`}
-				>
-					<Button
-						variant="secondary"
-						size="icon"
-						className="hover:bg-secondary/80 h-16 w-16 cursor-pointer rounded-full shadow-lg"
-						onClick={scrollToHero}
-						disabled={isAtTop}
-						aria-label="Scroll to top"
+			<AnimatePresence>
+				{isAtBottom && (
+					<motion.div
+						initial={{ opacity: 0, y: 20, scale: 0.8 }}
+						animate={{ opacity: 1, y: 0, scale: 1 }}
+						exit={{ opacity: 0, y: 20, scale: 0.8 }}
+						transition={{ type: "spring", stiffness: 300, damping: 30 }}
+						className="fixed bottom-8 left-1/2 z-50 -translate-x-1/2 transform"
 					>
-						<ArrowUp className="h-8 w-8" />
-					</Button>
-				</div>
-			)}
+						<motion.div
+							whileHover={{ scale: 1.1 }}
+							whileTap={{ scale: 0.9 }}
+						>
+							<Button
+								variant="secondary"
+								size="icon"
+								className="glass-effect h-16 w-16 cursor-pointer rounded-full shadow-2xl hover:shadow-blue-500/25 border-blue-500/20 hover:border-blue-500/40 transition-all duration-300"
+								onClick={scrollToHero}
+								disabled={isAtTop}
+								aria-label="Scroll to top"
+							>
+								<ArrowUp className="h-8 w-8 text-blue-400" />
+							</Button>
+						</motion.div>
+					</motion.div>
+				)}
+			</AnimatePresence>
 		</>
 	)
 }

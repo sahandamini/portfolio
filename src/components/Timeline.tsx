@@ -1,5 +1,6 @@
 'use client'
 
+import { motion } from 'framer-motion'
 import {
 	Timeline,
 	TimelineConnector,
@@ -16,53 +17,64 @@ import React from 'react'
 const MyTimeline: React.FC = () => {
 	return (
 		<Timeline className="mx-auto w-full max-w-2xl">
-			<TimelineItem className="pb-12">
-				<TimelineSeparator className="h-32">
-					<TimelineDot className="bg-secondary text-secondary-foreground flex h-10 w-10 items-center justify-center">
-						<Briefcase className="h-5 w-5" />
-					</TimelineDot>
-					<TimelineConnector className="bg-secondary w-1" />
-				</TimelineSeparator>
-				<TimelineContent className="pl-8">
-					<TimelineTitle className="text-secondary-foreground mb-2 text-3xl font-bold">
-						JPMorgan Chase
-					</TimelineTitle>
-					<TimelineDescription className="text-muted-foreground text-lg">
-						Nov 2024 - Present
-					</TimelineDescription>
-				</TimelineContent>
-			</TimelineItem>
-			<TimelineItem className="pb-12">
-				<TimelineSeparator className="h-32">
-					<TimelineDot className="bg-secondary text-secondary-foreground flex h-10 w-10 items-center justify-center">
-						<Briefcase className="h-5 w-5" />
-					</TimelineDot>
-					<TimelineConnector className="bg-secondary w-1" />
-				</TimelineSeparator>
-				<TimelineContent className="pl-8">
-					<TimelineTitle className="text-secondary-foreground mb-2 text-3xl font-bold">
-						Ochsner Health
-					</TimelineTitle>
-					<TimelineDescription className="text-muted-foreground text-lg">
-						Nov 2021 - Nov 2024
-					</TimelineDescription>
-				</TimelineContent>
-			</TimelineItem>
-			<TimelineItem>
-				<TimelineSeparator>
-					<TimelineDot className="bg-secondary text-secondary-foreground flex h-10 w-10 items-center justify-center">
-						<GraduationCap className="h-5 w-5" />
-					</TimelineDot>
-				</TimelineSeparator>
-				<TimelineContent className="pl-8">
-					<TimelineTitle className="text-secondary-foreground mb-2 text-3xl font-bold">
-						Graduated
-					</TimelineTitle>
-					<TimelineDescription className="text-muted-foreground text-lg">
-						May 2021
-					</TimelineDescription>
-				</TimelineContent>
-			</TimelineItem>
+			{[
+				{
+					company: "JPMorgan Chase",
+					period: "Nov 2024 - Present",
+					icon: Briefcase,
+					delay: 0
+				},
+				{
+					company: "Ochsner Health",
+					period: "Nov 2021 - Nov 2024",
+					icon: Briefcase,
+					delay: 0.2
+				},
+				{
+					company: "Graduated",
+					period: "May 2021",
+					icon: GraduationCap,
+					delay: 0.4,
+					isLast: true
+				}
+			].map((item, index) => (
+				<motion.div
+					key={index}
+					initial={{ opacity: 0, x: -30 }}
+					whileInView={{ opacity: 1, x: 0 }}
+					transition={{ duration: 0.6, delay: item.delay, ease: "easeOut" }}
+					viewport={{ once: true }}
+				>
+					<TimelineItem className={item.isLast ? "" : "pb-16"}>
+						<TimelineSeparator className="h-40">
+							<motion.div
+								whileHover={{ scale: 1.2, rotate: 5 }}
+								transition={{ type: "spring", stiffness: 300, damping: 20 }}
+							>
+								<TimelineDot className="bg-gradient-to-br from-purple-500 to-pink-500 text-white flex h-14 w-14 items-center justify-center shadow-lg ring-4 ring-purple-500/20">
+									<item.icon className="h-7 w-7" />
+								</TimelineDot>
+							</motion.div>
+							{!item.isLast && (
+								<TimelineConnector className="bg-gradient-to-b from-purple-500/50 to-pink-500/50 w-1 rounded-full" />
+							)}
+						</TimelineSeparator>
+						<TimelineContent className="pl-10">
+							<motion.div
+								whileHover={{ x: 5 }}
+								transition={{ type: "spring", stiffness: 300, damping: 30 }}
+							>
+								<TimelineTitle className="text-foreground mb-3 text-4xl font-bold">
+									{item.company}
+								</TimelineTitle>
+								<TimelineDescription className="text-muted-foreground text-xl font-medium">
+									{item.period}
+								</TimelineDescription>
+							</motion.div>
+						</TimelineContent>
+					</TimelineItem>
+				</motion.div>
+			))}
 		</Timeline>
 	)
 }
