@@ -14,3 +14,4 @@ pitchfork.local.toml
 .projects
 .fallow
 worker-configuration.d.ts
+public/resume.pdf

@@ -20,6 +20,7 @@ DNS and email.
   `vp check` alone skips the `.astro` steps.
 - `vp run build` — build the site. `vp build` does not run Astro.
 - `vp run preview` — serve the build with `wrangler dev`.
+- `vp run resume` — build `public/resume.pdf` from `resume/resume.tex`
 - `vp run test:unit` — run Vitest unit tests (`src/**/*.unit.test.ts`)
 - `BASE_URL=<url> vp run e2e` — run Playwright smoke tests. Playwright starts no
   server.
@@ -47,6 +48,9 @@ Do not reverse these decisions without a request from Sahand.
 - Check the `error` value of every Resend call. `emails.send()` does not throw
   when Resend refuses a message.
 - Never tell a visitor that a message was sent unless the action succeeded.
+
+- Each build generates the resume from `resume/resume.tex`. Do not commit the
+  PDF. Use pdfLaTeX, because XeTeX engines change the fonts.
 
 ## Workers limits
 

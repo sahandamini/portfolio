@@ -25,7 +25,8 @@ To send real email from the dev server, put `RESEND_API_KEY=<key>` in
 | ----------------------------------- | --------------------------------------- |
 | `vp run check`                      | Run format, lint, and type checks       |
 | `vp run test:unit`                  | Run unit tests                          |
-| `vp run build`                      | Build the site into `dist/`             |
+| `vp run resume`                     | Build `public/resume.pdf`               |
+| `vp run build`                      | Build the resume and the site           |
 | `vp run preview`                    | Serve the build, on :8787               |
 | `BASE_URL=<url> vp run e2e`         | Run smoke tests against a running site  |
 | `BASE_URL=<url> vp run test:visual` | Compare a running site with screenshots |
@@ -61,6 +62,17 @@ pnpm exec wrangler preview base-config secret put RESEND_API_KEY
 ```
 
 A new Preview copies the base value when Cloudflare creates it.
+
+## Resume
+
+`resume/resume.tex` is the source. Each build compiles it into
+`public/resume.pdf` with pdfLaTeX, and Git ignores the PDF. To publish a new
+resume, change the source and deploy.
+
+`scripts/build-resume.sh` installs TeX Live 2025 from a frozen repository into
+`node_modules/.cache`. The first build takes about one minute. If this
+repository is down, the build fails and the live site stays on the last deploy.
+The dev server serves `/resume.pdf` only after you run `vp run resume`.
 
 ## Domain, DNS, and email
 

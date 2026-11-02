@@ -5,7 +5,8 @@
 	"type": "module",
 	"scripts": {
 		"dev": "astro dev --ignore-lock",
-		"build": "astro build",
+		"resume": "sh scripts/build-resume.sh",
+		"build": "sh scripts/build-resume.sh && astro build",
 		"preview": "wrangler dev",
 		"deploy": "pnpm run build && wrangler deploy",
 		"check": "vp check && prettier --check \"**/*.astro\" && eslint && astro check",
