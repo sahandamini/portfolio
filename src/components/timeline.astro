@@ -1,0 +1,32 @@
+---
+import { Briefcase, GraduationCap } from '@lucide/astro'
+
+const entries = [
+	{ title: 'JPMorgan Chase', dates: 'Nov 2024 - Present', icon: Briefcase },
+	{ title: 'Ochsner Health', dates: 'Nov 2021 - Nov 2024', icon: Briefcase },
+	{ title: 'Graduated', dates: 'May 2021', icon: GraduationCap },
+]
+---
+
+<ol class="mx-auto flex w-full max-w-2xl flex-col" role="list">
+	{entries.map(({ title, dates, icon: Icon }, index) => {
+		const isLast = index === entries.length - 1
+
+		return (
+			<li class:list={['flex gap-4', !isLast && 'pb-12']}>
+				<div class:list={['flex flex-col items-center', !isLast && 'h-32']}>
+					<div class="bg-secondary text-secondary-foreground mt-1 flex size-10 items-center justify-center">
+						<Icon class="size-5" />
+					</div>
+					{!isLast && <div class="bg-secondary my-2 w-1 flex-1" />}
+				</div>
+				<div class="flex-1 pb-7 pl-8 text-left">
+					<div class="text-secondary-foreground mb-2 text-3xl font-bold">
+						{title}
+					</div>
+					<div class="text-muted-foreground text-lg">{dates}</div>
+				</div>
+			</li>
+		)
+	})}
+</ol>

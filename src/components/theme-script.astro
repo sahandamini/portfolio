@@ -1,0 +1,48 @@
+<script is:inline>
+	{
+		const root = document.documentElement
+		const darkScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+		// localStorage throws when the browser blocks site data.
+		const readChoice = () => {
+			try {
+				return localStorage.getItem('theme') ?? 'system'
+			} catch {
+				return 'system'
+			}
+		}
+
+		const apply = (choice) => {
+			const isDark =
+				choice === 'dark' || (choice === 'system' && darkScheme.matches)
+
+			root.classList.toggle('dark', isDark)
+			root.style.colorScheme = isDark ? 'dark' : 'light'
+			root.dataset.themeChoice = choice
+
+			for (const button of document.querySelectorAll('[data-theme-value]')) {
+				button.ariaPressed = String(button.dataset.themeValue === choice)
+			}
+		}
+
+		apply(readChoice())
+		// The dataset keeps the choice when the browser blocks localStorage.
+		const reapply = () => apply(root.dataset.themeChoice)
+
+		darkScheme.addEventListener('change', reapply)
+		// This script runs in the head, before the buttons exist.
+		document.addEventListener('DOMContentLoaded', reapply)
+
+		document.addEventListener('click', (event) => {
+			const button = event.target.closest('[data-theme-value]')
+
+			if (!button) return
+
+			try {
+				localStorage.setItem('theme', button.dataset.themeValue)
+			} catch {}
+
+			apply(button.dataset.themeValue)
+		})
+	}
+</script>

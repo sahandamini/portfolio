@@ -1,0 +1,26 @@
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "portfolio",
+	"main": "./src/worker.ts",
+	"compatibility_date": "2026-10-01",
+	"observability": { "enabled": true },
+	"routes": [{ "pattern": "sahandamini.com", "custom_domain": true }],
+	// Custom domains turn workers.dev off unless it is set here.
+	"workers_dev": true,
+	// Workers Builds runs `wrangler preview` for pull request branches, which
+	// needs this block. preview_urls gives each Preview a workers.dev URL.
+	"previews": {},
+	"preview_urls": true,
+	// `wrangler deploy` fails without this secret. `wrangler preview` does not
+	// check it, so set the Preview base config too. See README.md.
+	"secrets": { "required": ["RESEND_API_KEY"] },
+	"migrations": [{ "tag": "v1", "new_sqlite_classes": ["RateLimiter"] }],
+	"assets": {
+		"directory": "./dist/client",
+		"binding": "ASSETS",
+		"html_handling": "drop-trailing-slash",
+		"not_found_handling": "404-page",
+		// With not_found_handling set, the Worker receives only these paths.
+		"run_worker_first": ["/_actions/*", "/ingest/*"],
+	},
+}

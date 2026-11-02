@@ -1,0 +1,26 @@
+---
+import { Monitor, Moon, Sun } from '@lucide/astro'
+import Button from '@/components/ui/button.astro'
+
+const choices = [
+	{ value: 'system', label: 'System theme', icon: Monitor },
+	{ value: 'dark', label: 'Dark theme', icon: Moon },
+	{ value: 'light', label: 'Light theme', icon: Sun },
+]
+---
+
+<div class="border-border/70 bg-background/40 relative inline-flex h-fit w-fit shrink-0 items-center overflow-hidden rounded-full border p-0.5 shadow-xs backdrop-blur-md">
+	<div class="theme-pill bg-brand absolute top-0.5 left-0.5 size-9 rounded-full shadow-sm ring-1 ring-white/20"></div>
+	{choices.map(({ value, label, icon: Icon }) => (
+		<Button
+			variant="ghost"
+			size="icon"
+			class="relative z-10 cursor-pointer rounded-full hover:bg-transparent active:scale-95 dark:hover:bg-transparent"
+			data-theme-value={value}
+			aria-pressed={value === 'system' ? 'true' : 'false'}
+		>
+			<Icon class="text-muted-foreground size-4" />
+			<span class="sr-only">{label}</span>
+		</Button>
+	))}
+</div>

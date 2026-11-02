@@ -1,0 +1,12 @@
+#:schema https://pitchfork.jdx.dev/schema.json
+
+# The daemon namespace derives from the directory name. Each Worktrunk worktree
+# gets isolated daemons.
+
+[daemons.dev]
+run = 'APP_PORT="$PORT" exec vp run dev'
+port = { expect = [3000], bump = 10 }
+mise = true
+auto = ["start", "stop"]
+retry = 3
+ready_cmd = { run = 'curl -fsS "http://127.0.0.1:$PORT/" > /dev/null', timeout = "30s" }

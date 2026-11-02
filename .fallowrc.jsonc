@@ -1,0 +1,14 @@
+{
+	"ignoreDependencies": [
+		// CSS imports these packages, and fallow reads only JS imports.
+		"@fontsource-variable/geist",
+		"@fontsource-variable/geist-mono",
+		"tw-animate-css",
+		// The production build needs these, so they stay in dependencies. fallow
+		// counts astro.config.ts as a dev file.
+		"@astrojs/cloudflare",
+		"@astrojs/sitemap",
+		"@tailwindcss/vite",
+		"astro",
+	],
+}

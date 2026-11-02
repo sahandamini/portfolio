@@ -1,0 +1,32 @@
+---
+import { ArrowDown, ArrowUp } from '@lucide/astro'
+import Button from '@/components/ui/button.astro'
+---
+
+<div
+	data-scroll-down
+	class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 data-hidden:hidden"
+>
+	<Button
+		variant="secondary"
+		size="icon"
+		class="hover:bg-secondary/80 size-16 cursor-pointer rounded-full shadow-lg"
+		aria-label="Scroll to about"
+	>
+		<ArrowDown />
+	</Button>
+</div>
+<div
+	data-scroll-up
+	data-hidden
+	class="fixed bottom-4 left-1/2 z-50 -translate-x-1/2 data-hidden:hidden"
+>
+	<Button
+		variant="secondary"
+		size="icon"
+		class="hover:bg-secondary/80 size-16 cursor-pointer rounded-full shadow-lg"
+		aria-label="Scroll to top"
+	>
+		<ArrowUp />
+	</Button>
+</div>
