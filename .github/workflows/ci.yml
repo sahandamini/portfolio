@@ -1,0 +1,91 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+# No secrets on CI. Every secret in .env.schema is optional.
+env:
+  APP_ENV: test
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: setup vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          version: '1.1.0'
+          node-version-file: .node-version
+          cache: true
+      - run: vp run check
+      - run: vp run test:unit
+
+  test-visual:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: setup vite+
+        uses: voidzero-dev/setup-vp@v1
+        with:
+          version: '1.1.0'
+          node-version-file: .node-version
+          cache: true
+      - name: Install Playwright Browsers
+        run: vp exec playwright install chromium --with-deps --no-shell
+      - name: Build the site
+        run: vp run build
+      # wrangler dev serves dist with the Workers routing rules.
+      - name: Start Wrangler
+        run: vp exec wrangler dev --port 3000 > server.log 2>&1 &
+        env:
+          WRANGLER_SEND_METRICS: 'false'
+      - name: Wait for Wrangler
+        run: >-
+          curl --fail --silent --output /dev/null --retry 30 --retry-delay 1
+          --retry-all-errors http://localhost:3000/
+      - name: Run the visual test
+        run: vp run test:visual
+        env:
+          BASE_URL: http://localhost:3000
+      - name: Upload the visual test report
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-test-report
+          path: |
+            .playwright/report/
+            .playwright/test-results/
+            server.log
+          include-hidden-files: true
+          retention-days: 14
+      # This step replaces the Playwright report, so it follows the report
+      # upload. See "Visual baselines" in README.md.
+      - name: Record candidate baselines
+        if: failure()
+        run: vp run test:visual:record
+        env:
+          BASE_URL: http://localhost:3000
+      - name: Upload candidate baselines
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-baselines
+          path: e2e/__screenshots__/
+          retention-days: 14

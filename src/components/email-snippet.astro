@@ -1,0 +1,25 @@
+---
+import { Check, Copy } from '@lucide/astro'
+import Button from '@/components/ui/button.astro'
+
+interface Props {
+	email: string
+}
+
+const { email } = Astro.props
+---
+
+<div class="border-border bg-background/60 text-foreground dark:bg-background/40 relative flex w-fit max-w-xs items-center justify-between rounded-md border px-3 py-2 text-sm shadow-xs backdrop-blur">
+	<pre class="pr-2 font-mono text-sm font-light whitespace-nowrap">{email}</pre>
+	<Button
+		variant="ghost"
+		size="icon"
+		class="group size-6 cursor-pointer hover:bg-transparent dark:hover:bg-transparent"
+		aria-label="Copy email to clipboard"
+		data-copy-email={email}
+	>
+		<Copy class="text-muted-foreground size-4 group-data-copied:hidden" />
+		<Check class="text-brand hidden size-4 group-data-copied:block" />
+	</Button>
+</div>
+<script src="@/scripts/copy-email.ts"></script>

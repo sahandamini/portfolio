@@ -1,0 +1,35 @@
+---
+import '@/styles/global.css'
+import ThemeScript from '@/components/theme-script.astro'
+
+interface Props {
+	title?: string
+	description?: string
+}
+
+const { title = 'Sahand Amini', description = 'Sahand Amini Portfolio' } =
+	Astro.props
+
+const canonicalUrl = new URL(Astro.url.pathname, Astro.site).href
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonicalUrl} />
+		<link rel="canonical" href={canonicalUrl} />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<ThemeScript />
+	</head>
+	<body class="font-sans antialiased">
+		<slot />
+		<script src="@/scripts/analytics.ts"></script>
+	</body>
+</html>

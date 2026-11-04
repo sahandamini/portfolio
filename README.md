@@ -1,36 +1,99 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Sahand Amini
 
-## Getting Started
+My portfolio site. Built with Astro, Tailwind CSS 4, and Vite+, and hosted on
+Cloudflare Workers.
 
-First, run the development server:
+Production: https://sahandamini.com
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Local development
+
+Install [mise](https://mise.jdx.dev/getting-started.html), then run:
+
+```sh
+mise trust
+mise run bootstrap
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[Pitchfork](https://pitchfork.jdx.dev) starts the dev server when you enter the
+project directory. Without Pitchfork, run `vp run dev`. This command fails if
+the Pitchfork daemon already holds the port.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+To send real email from the dev server, put `RESEND_API_KEY=<key>` in
+`.dev.vars`. Git ignores this file.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Command                             | Purpose                                 |
+| ----------------------------------- | --------------------------------------- |
+| `vp run check`                      | Run format, lint, and type checks       |
+| `vp run test:unit`                  | Run unit tests                          |
+| `vp run resume`                     | Build `public/resume.pdf`               |
+| `vp run build`                      | Build the resume and the site           |
+| `vp run preview`                    | Serve the build, on :8787               |
+| `BASE_URL=<url> vp run e2e`         | Run smoke tests against a running site  |
+| `BASE_URL=<url> vp run test:visual` | Compare a running site with screenshots |
 
-## Learn More
+## Hosting
 
-To learn more about Next.js, take a look at the following resources:
+Merging to `main` deploys the site. Each pull request gets its own Preview link.
+Smoke tests run on each Preview and on the live site after a merge.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+To deploy from your machine, run `pnpm exec varlock run -- vp run deploy`. This
+needs the Cloudflare token in `.env.local`.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+These commands are set in the Cloudflare dashboard, under the Worker's build
+settings:
 
-## Deploy on Vercel
+| Setting                   | Command                      |
+| ------------------------- | ---------------------------- |
+| Build                     | `pnpm run build`             |
+| Deploy                    | `pnpm exec wrangler deploy`  |
+| Non-production deployment | `pnpm exec wrangler preview` |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+The site is prerendered. The Worker runs only for `/_actions/*`, which sends the
+contact form, and `/ingest/*`, which proxies PostHog.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Secrets
+
+The Worker needs `RESEND_API_KEY`. Production and Previews store the key
+separately:
+
+```sh
+pnpm exec wrangler secret put RESEND_API_KEY
+pnpm exec wrangler preview base-config secret put RESEND_API_KEY
+```
+
+A new Preview copies the base value when Cloudflare creates it.
+
+## Resume
+
+`resume/resume.tex` is the source. Each build compiles it into
+`public/resume.pdf` with pdfLaTeX, and Git ignores the PDF. To publish a new
+resume, change the source and deploy.
+
+`scripts/build-resume.sh` installs TeX Live 2025 from a frozen repository into
+`node_modules/.cache`. The first build takes about one minute. If this
+repository is down, the build fails and the live site stays on the last deploy.
+The dev server serves `/resume.pdf` only after you run `vp run resume`.
+
+## Domain, DNS, and email
+
+See [docs/email.md](docs/email.md).
+
+## Environment variables
+
+[Varlock](https://varlock.dev) manages environment variables, and `.env.schema`
+documents each one. Local secrets live in `.env.local`, encrypted with
+`varlock encrypt`. The build needs no secrets.
+
+## Visual baselines
+
+`vp run test:visual` compares `/` and `/contact` with the screenshots in
+`e2e/__screenshots__`. Screenshots depend on the OS and fonts, so record them
+only on the `ubuntu-24.04` CI runner. Never commit local screenshots.
+
+If a screenshot changes, the `test-visual` job fails and uploads two artifacts:
+
+- `visual-test-report` shows each image diff.
+- `visual-baselines` holds a full set of new screenshots.
+
+If the change is intentional, extract `visual-baselines` into
+`e2e/__screenshots__` and commit the result.

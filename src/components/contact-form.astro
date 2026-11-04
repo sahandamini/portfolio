@@ -1,0 +1,48 @@
+---
+import { Mail } from '@lucide/astro'
+import Button from '@/components/ui/button.astro'
+
+const fieldClasses =
+	'placeholder:text-muted-foreground selection:bg-primary selection:text-primary-foreground dark:bg-input/30 border-border focus-visible:border-ring focus-visible:ring-ring/50 w-full rounded-md border bg-transparent px-3 text-base shadow-xs transition-shadow outline-none focus-visible:ring-3 md:text-sm'
+---
+
+<form data-contact-form method="post" class="space-y-6">
+	<div class="grid gap-2">
+		<label for="contact-email" class="text-sm leading-none font-medium">
+			Email
+		</label>
+		<input
+			id="contact-email"
+			name="email"
+			type="email"
+			autocomplete="email"
+			required
+			maxlength="254"
+			placeholder="your.email@example.com"
+			class:list={['h-9 py-1', fieldClasses]}
+		/>
+	</div>
+	<div class="grid gap-2">
+		<label for="contact-message" class="text-sm leading-none font-medium">
+			Message
+		</label>
+		<textarea
+			id="contact-message"
+			name="message"
+			required
+			maxlength="5000"
+			placeholder="Enter your message"
+			class:list={['field-sizing-content min-h-16 py-2', fieldClasses]}
+		></textarea>
+	</div>
+	<Button type="submit" class="w-full cursor-pointer">
+		<span data-contact-submit-label>Send</span>
+		<Mail class="ml-2 size-4" />
+	</Button>
+	<p
+		data-contact-status
+		role="status"
+		class="text-sm empty:hidden data-[state=error]:text-destructive"
+	></p>
+</form>
+<script src="@/scripts/contact-form.ts"></script>

@@ -1,0 +1,163 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'Geist Mono Variable', ui-monospace, monospace;
+	--color-brand: var(--brand);
+	--color-brand-hover: var(--brand-hover);
+	--color-brand-glow: var(--brand-glow);
+	--color-linkedin: var(--linkedin);
+	--color-resume: var(--resume);
+	--color-role: oklch(0.714 0.203 305.504);
+	--color-background: var(--background);
+	--color-foreground: var(--foreground);
+	--color-ring: var(--ring);
+	--color-input: var(--input);
+	--color-border: var(--border);
+	--color-destructive: var(--destructive);
+	--color-accent-foreground: var(--accent-foreground);
+	--color-accent: var(--accent);
+	--color-muted-foreground: var(--muted-foreground);
+	--color-muted: var(--muted);
+	--color-secondary-foreground: var(--secondary-foreground);
+	--color-secondary: var(--secondary);
+	--color-primary-foreground: var(--primary-foreground);
+	--color-primary: var(--primary);
+	--color-popover-foreground: var(--popover-foreground);
+	--color-popover: var(--popover);
+	--color-card-foreground: var(--card-foreground);
+	--color-card: var(--card);
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
+}
+
+:root {
+	--radius: 0.625rem;
+	--background: oklch(100% 0 0); /* White */
+	--foreground: oklch(21.5% 0 0); /* Dark Gray */
+	--card: oklch(100% 0 0); /* White */
+	--card-foreground: oklch(21.5% 0 0); /* Dark Gray */
+	--popover: oklch(100% 0 0); /* White */
+	--popover-foreground: oklch(21.5% 0 0); /* Dark Gray */
+	--primary: oklch(21.5% 0 0); /* Dark Gray */
+	--primary-foreground: oklch(100% 0 0); /* White */
+	--secondary: oklch(95% 0 0); /* Slightly darker gray for better visibility */
+	--secondary-foreground: oklch(10% 0 0); /* Even darker gray for contrast */
+	--muted: oklch(98% 0 0); /* Light Gray */
+	--muted-foreground: oklch(35% 0 0); /* Medium Gray */
+	--accent: oklch(98% 0 0); /* Light Gray */
+	--accent-foreground: oklch(21.5% 0 0); /* Dark Gray */
+	--destructive: oklch(
+		0.577 0.245 27.325
+	); /* Keep original destructive color */
+	--border: oklch(85% 0 0); /* Light Gray Border */
+	--input: oklch(100% 0 0); /* White */
+	--ring: oklch(35% 0 0); /* Medium Gray Ring */
+	--brand: oklch(0.511 0.262 276.966);
+	--brand-hover: oklch(0.457 0.24 277.023);
+	--brand-glow: oklch(0.673 0.182 276.935);
+	--linkedin: #0a66c2;
+	--resume: oklch(0.488 0.243 264.376);
+}
+
+.dark {
+	--background: oklch(13.5% 0 0); /* Very Dark Gray */
+	--foreground: oklch(95% 0 0); /* White */
+	--card: oklch(21.5% 0 0); /* Dark Gray */
+	--card-foreground: oklch(95% 0 0); /* White */
+	--popover: oklch(21.5% 0 0); /* Dark Gray */
+	--popover-foreground: oklch(95% 0 0); /* White */
+	--primary: oklch(95% 0 0); /* White */
+	--primary-foreground: oklch(13.5% 0 0); /* Very Dark Gray */
+	--secondary: oklch(28% 0 0); /* Medium Dark Gray */
+	--secondary-foreground: oklch(95% 0 0); /* White */
+	--muted: oklch(28% 0 0); /* Medium Dark Gray */
+	--muted-foreground: oklch(70% 0 0); /* Light Gray */
+	--accent: oklch(28% 0 0); /* Medium Dark Gray */
+	--accent-foreground: oklch(95% 0 0); /* White */
+	--destructive: oklch(
+		0.704 0.191 22.216
+	); /* Keep original destructive color */
+	--border: oklch(1 0 0 / 10%); /* Light Border */
+	--input: oklch(21.5% 0 0); /* Dark Gray */
+	--ring: oklch(55.6% 0 0); /* Medium Gray Ring */
+	--brand: oklch(0.585 0.233 277.117);
+	--brand-hover: oklch(0.511 0.262 276.966);
+	--brand-glow: oklch(0.457 0.24 277.023);
+	--linkedin: #0a66c2;
+	--resume: oklch(0.809 0.105 251.813);
+}
+
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+@keyframes blink-caret {
+	from,
+	to {
+		opacity: 0;
+	}
+	50% {
+		opacity: 1;
+	}
+}
+
+/* A zero font size hides a letter and its width, so the name grows from the
+   center. Browsers without display keyframes need this form. */
+@keyframes type-letter {
+	from,
+	to {
+		font-size: 0;
+	}
+}
+
+.typing-cursor::after {
+	content: '|';
+}
+
+/* Each letter renders in the HTML, so the name needs no JavaScript. */
+@media (prefers-reduced-motion: no-preference) {
+	.hero-letter {
+		animation: type-letter 0s calc(var(--letter-index) * 70ms) backwards;
+	}
+
+	.typing-cursor::after {
+		animation: blink-caret 1s step-end infinite;
+	}
+}
+
+.theme-pill {
+	transition: translate 240ms cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.theme-pill {
+		transition: none;
+	}
+}
+
+html[data-theme-choice='dark'] .theme-pill {
+	translate: 100%;
+}
+
+html[data-theme-choice='light'] .theme-pill {
+	translate: 200%;
+}
+
+html[data-theme-choice='system'] [data-theme-value='system'] svg,
+html[data-theme-choice='dark'] [data-theme-value='dark'] svg,
+html[data-theme-choice='light'] [data-theme-value='light'] svg {
+	color: white;
+}
