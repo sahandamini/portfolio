@@ -43,22 +43,6 @@ export type CoercedEnvSchema = {
   CLOUDFLARE_API_TOKEN?: string;
   
   /**
-   * **PORKBUN_API_KEY** 🔐 _sensitive_  
-   * Migration key. Porkbun stays the registrar. The app does not read these keys.  
-   * Caddy has its own key in the dotfiles repo.  
-   * ![icon](data:image/svg+xml;utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20fill%3D%22%23808080%22%20d%3D%22M29%2022h-5a2.003%202.003%200%200%201-2-2v-6a2%202%200%200%201%202-2h5v2h-5v6h5ZM18%2012h-4V8h-2v14h6a2.003%202.003%200%200%200%202-2v-6a2%202%200%200%200-2-2m-4%208v-6h4v6Zm-6-8H3v2h5v2H4a2%202%200%200%200-2%202v2a2%202%200%200%200%202%202h6v-8a2%202%200%200%200-2-2m0%208H4v-2h4Z%22%2F%3E%3C%2Fsvg%3E)   
-   *   
-   * 📚 {@link https://porkbun.com/api/json/v3/documentation}  
-   */
-  PORKBUN_API_KEY?: string;
-  
-  /**
-   * **PORKBUN_SECRET_KEY** 🔐 _sensitive_  
-   * ![icon](data:image/svg+xml;utf-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2220%22%20height%3D%2220%22%20viewBox%3D%220%200%2032%2032%22%3E%3Cpath%20fill%3D%22%23808080%22%20d%3D%22M29%2022h-5a2.003%202.003%200%200%201-2-2v-6a2%202%200%200%201%202-2h5v2h-5v6h5ZM18%2012h-4V8h-2v14h6a2.003%202.003%200%200%200%202-2v-6a2%202%200%200%200-2-2m-4%208v-6h4v6Zm-6-8H3v2h5v2H4a2%202%200%200%200-2%202v2a2%202%200%200%200%202%202h6v-8a2%202%200%200%200-2-2m0%208H4v-2h4Z%22%2F%3E%3C%2Fsvg%3E)   
-   */
-  PORKBUN_SECRET_KEY?: string;
-  
-  /**
    * **RESEND_API_KEY** 🔐 _sensitive_  
    * Sends contact form email. The deployed Worker reads a Worker secret, and  
    * `astro dev` reads .dev.vars. See docs/email.md.  
@@ -70,11 +54,11 @@ export type CoercedEnvSchema = {
   
 };
 
-type _CoercedEnvSchema_dc17cc1a = CoercedEnvSchema;
+type _CoercedEnvSchema_bfe5dd42 = CoercedEnvSchema;
 
 declare module 'varlock/env' {
-  export interface TypedEnvSchema extends Readonly<_CoercedEnvSchema_dc17cc1a> {}
-  export interface PublicTypedEnvSchema extends Readonly<Pick<_CoercedEnvSchema_dc17cc1a, 'APP_ENV' | 'APP_PORT' | 'BASE_URL' | 'CLOUDFLARE_ACCOUNT_ID'>> {}
+  export interface TypedEnvSchema extends Readonly<_CoercedEnvSchema_bfe5dd42> {}
+  export interface PublicTypedEnvSchema extends Readonly<Pick<_CoercedEnvSchema_bfe5dd42, 'APP_ENV' | 'APP_PORT' | 'BASE_URL' | 'CLOUDFLARE_ACCOUNT_ID'>> {}
 }
 
 
@@ -84,4 +68,4 @@ export type EnvSchemaAsStrings = {
       : (NonNullable<CoercedEnvSchema[Property]> extends boolean ? ('true' | 'false') : string)
 };
 
-type _EnvSchemaAsStrings_dc17cc1a = EnvSchemaAsStrings;
+type _EnvSchemaAsStrings_bfe5dd42 = EnvSchemaAsStrings;
