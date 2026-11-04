@@ -9,7 +9,7 @@ export default {
 		// PostHog needs trailing slashes, and Astro removes them. This path must
 		// stay outside the Astro handler.
 		if (new URL(request.url).pathname.startsWith(POSTHOG_PREFIX)) {
-			return proxyToPostHog(request)
+			return proxyToPostHog(request, ctx)
 		}
 
 		return handle(request, env, ctx)

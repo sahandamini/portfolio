@@ -51,6 +51,16 @@ settings:
 The site is prerendered. The Worker runs only for `/_actions/*`, which sends the
 contact form, and `/ingest/*`, which proxies PostHog.
 
+## Analytics
+
+PostHog runs only on `sahandamini.com`. Local runs and Previews send no events.
+Playwright sets `navigator.webdriver`, so posthog-js drops its events.
+
+To exclude your own visits, open `https://sahandamini.com/?internal` once on
+each browser that you use. This sets the `$internal_or_test_user` person
+property. The project test account filter drops events from that person. If you
+clear the site data, open the URL again.
+
 ## Secrets
 
 The Worker needs `RESEND_API_KEY`. Production and Previews store the key
