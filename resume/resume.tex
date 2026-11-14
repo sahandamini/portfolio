@@ -76,6 +76,20 @@
 }
 
 
+\newcommand{\resumeProjectHeading}[2]{
+  \vspace{-1pt}\item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & \textit{\small #2} \\
+    \end{tabular*}\vspace{-5pt}
+}
+
+\newcommand{\resumeRole}[2]{
+  \vspace{2pt}
+  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \textit{\small#1} & \textit{\small #2} \\
+  \end{tabular*}\vspace{-5pt}
+}
+
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
 
 \renewcommand{\labelitemii}{$\circ$}
@@ -98,7 +112,7 @@
       \href{mailto:sahandaamini@gmail.com}{\faEnvelope}
       \href{https://www.linkedin.com/in/sahandamini/}{\faLinkedinSquare}
   }}
-  & \href{https://sahandamini.com/}{www.sahandamini.com}\\
+  & \href{https://sahandamini.com/}{sahandamini.com}\\
   Philadelphia, PA & (504) 401-1502\\
   Work Auth: US Citizen\\
 \end{tabular*}
@@ -108,7 +122,7 @@
 
 %--------SUMMARY------------
 \section{Summary}
-Full-stack developer with 4 years of professional experience working on backend systems. Experienced with React/Next.js on the frontend and Java/Spring/SQL on the backend. Also have basic DevOps knowledge in Docker/Terraform/AWS.
+Full-stack developer with 5 years of professional experience working on backend systems. Experienced with React, Next.js, and Astro on the frontend and Java/Spring/SQL on the backend. DevOps experience with Docker/Terraform/AWS.
 
 
 
@@ -116,8 +130,8 @@ Full-stack developer with 4 years of professional experience working on backend 
 \section{Skills}
 	\resumeSubHeadingListStart
 	\resumeSubItem{Languages}{Java, C\#, JavaScript, TypeScript, SQL, HTML, CSS, Bash}
-    \resumeSubItem{Frameworks}{Spring Boot, JUnit, React, Next.js, Node.js, Tailwind, Playwright, Vitest, ASP.NET Web API}
-    \resumeSubItem{DevOps}{AWS, Docker, Terraform, Jenkins}
+    \resumeSubItem{Frameworks}{Spring Boot, JUnit, React, Next.js, TanStack Start, Astro, Node.js, Tailwind, Playwright, Vitest, ASP.NET}
+    \resumeSubItem{DevOps}{AWS, Docker, Terraform, Jenkins, GitHub Actions, Cloudflare Workers}
     \resumeSubItem{Tools \& Technologies}{Git, Kafka, REST APIs}
     \resumeSubHeadingListEnd
 
@@ -171,18 +185,11 @@ Full-stack developer with 4 years of professional experience working on backend 
     {{Arizona State University}}{Tempe, AZ}
     {Teaching Assistant}{Aug 2018 - Dec 2018}
     \resumeItemListStart
-        \resumeItemWithoutTitle{Supported 250+ students in ASU’s intro Java course through tutoring, labs, review sessions, and other help}
+        \resumeItemWithoutTitle{Supported 250+ students in the intro Java course through tutoring, labs, and review sessions}
     \resumeItemListEnd
-    \vspace{3pt}
-
-    \resumeSubheading
-    {{ASU Research Computing}}{Tempe, AZ}
-    {Scientific Software Engineer, HPC}{May 2018 - Aug 2018}
+    \resumeRole{Scientific Software Engineer, HPC}{May 2018 - Aug 2018}
     \resumeItemListStart
-        \resumeItemWithoutTitle{Improved molecular dynamics simulations benchmarks by 31\%+ with parallel programming paradigms MPI \& OpenMP}
-        \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
-            \item{Presented data at the PEARC Conference, fully funded by NIH}
-        \end{description}
+        \resumeItemWithoutTitle{Improved molecular dynamics simulation benchmarks by 31\%+ with MPI \& OpenMP; presented at PEARC (NIH-funded)}
     \resumeItemListEnd
     \vspace{3pt}
     
@@ -193,9 +200,12 @@ Full-stack developer with 4 years of professional experience working on backend 
 %-----------PROJECTS-----------------
 \section{Projects}
   \resumeSubHeadingListStart
-    \resumeSubheading
-    {{Portfolio}}{}
-    {\href{https://sahandamini.com/}{www.sahandamini.com}}{}
+    \resumeProjectHeading{Skin Groove}{\href{https://skingroove.studio/}{skingroove.studio}}
+    \resumeItemListStart
+        \resumeItemWithoutTitle{Built a website for a virtual esthetics practice with Astro, Tailwind CSS, Cloudflare Workers, and Cal.com booking}
+    \resumeItemListEnd
+    \vspace{3pt}
+    \resumeProjectHeading{Portfolio}{\href{https://sahandamini.com/}{sahandamini.com}}
     \resumeItemListStart
         \resumeItemWithoutTitle{Developed personal website using Astro, TypeScript, Tailwind CSS, Cloudflare Workers, PostHog, Playwright, and Vitest}
     \resumeItemListEnd
@@ -214,7 +224,7 @@ Full-stack developer with 4 years of professional experience working on backend 
         \resumeItemListStart
         \resumeItem{Capstone}{Publication Repository for NASA JPL's Psyche Mission}
         \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
-            \item{Designed and developed an online repository for NASA in a six member team to search, categorize and archive Psyche Mission publications (journals, books, conference proceedings, etc.) using MongoDB, Express, React, NodeJS, and AWS S3}
+            \item{Built a searchable archive of Psyche Mission papers in a six-member team using MongoDB, Express, React, and AWS S3}
         \end{description}
         \resumeItem{{National Merit Finalist}}{Received full ride scholarship to Arizona State University}
         \resumeItemWithoutTitle{Studied abroad in Barcelona, Spain during Fall 2019 semester}
