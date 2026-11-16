@@ -82,7 +82,8 @@ resume, change the source and deploy.
 `scripts/build-resume.sh` installs TeX Live 2025 from a frozen repository into
 `node_modules/.cache`. The first build takes about one minute. If this
 repository is down, the build fails and the live site stays on the last deploy.
-The dev server serves `/resume.pdf` only after you run `vp run resume`.
+In dev, a request for `/resume.pdf` rebuilds the PDF when a file in `resume/` is
+newer than it. Reload the PDF to see a change.
 
 ## Domain, DNS, and email
 

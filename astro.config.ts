@@ -3,6 +3,8 @@ import sitemap from '@astrojs/sitemap'
 import tailwindcss from '@tailwindcss/vite'
 import { defineConfig } from 'astro/config'
 
+import { resumeDevServer } from './scripts/resume-dev-server'
+
 export default defineConfig({
 	site: 'https://sahandamini.com',
 	output: 'static',
@@ -12,7 +14,7 @@ export default defineConfig({
 	adapter: cloudflare({ imageService: 'compile' }),
 	session: false,
 	devToolbar: { enabled: true, placement: 'bottom-right' },
-	integrations: [sitemap()],
+	integrations: [sitemap(), resumeDevServer()],
 	server: {
 		host: '127.0.0.1',
 		port: Number(process.env.APP_PORT ?? 3000),
