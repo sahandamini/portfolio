@@ -66,7 +66,7 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
     \end{tabular*}\vspace{-5pt}
@@ -75,23 +75,23 @@
 
 \newcommand{\resumeProjectHeading}[2]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
       \textbf{#1} & \textit{\small #2} \\
     \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeRole}[2]{
   \vspace{2pt}
-  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+  \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
     \textit{\small#1} & \textit{\small #2} \\
   \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
 
-\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemii}{\textbullet}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0pt, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
