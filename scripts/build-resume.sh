@@ -9,7 +9,7 @@ set -eu
 
 texlive_year=2025
 repository="https://ftp.math.utah.edu/pub/tex/historic/systems/texlive/$texlive_year/tlnet-final"
-packages='academicons amsfonts cm cm-super cjk ec enumitem etoolbox fancyhdr fontawesome graphics
+packages='academicons amsfonts cm cm-super cjk ec enumitem etoolbox fancyhdr graphics
 	hyperref latex latex-bin latex-fonts marvosym preprint psnfss titlesec tools url wasy wasysym xcolor'
 
 root=$(CDPATH='' cd -- "$(dirname -- "$0")/.." && pwd)
