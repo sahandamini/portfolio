@@ -4,22 +4,14 @@
 % License : MIT
 %------------------------
 
-\documentclass[letterpaper,10.8pt]{article}
+\documentclass[letterpaper,10pt]{article}
 
-\usepackage{CJKutf8}
-\usepackage{latexsym}
 \usepackage[empty]{fullpage}
 \usepackage{titlesec}
-\usepackage{marvosym}
 \usepackage[usenames,dvipsnames]{color}
-\usepackage{verbatim}
 \usepackage{enumitem}
 \usepackage[pdftex]{hyperref}
 \usepackage{fancyhdr}
-\usepackage{multicol}
-\usepackage{academicons}
-\usepackage{fontawesome}
-\usepackage{wasysym}
 
 \pagestyle{fancy}
 \fancyhf{} % clear all header and footer fields
@@ -45,7 +37,12 @@
   \vspace{-3pt}\scshape\raggedright\large
 }{}{0em}{}[\color{black}\titlerule \vspace{-5pt}]
 
-\hypersetup{colorlinks=true, urlcolor=RoyalBlue}
+\hypersetup{
+  colorlinks=true,
+  urlcolor=RoyalBlue,
+  pdftitle={Sahand Amini - Resume},
+  pdfauthor={Sahand Amini}
+}
 
 %-------------------------
 % Custom commands
@@ -69,7 +66,7 @@
 
 \newcommand{\resumeSubheading}[4]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
       \textbf{#1} & #2 \\
       \textit{\small#3} & \textit{\small #4} \\
     \end{tabular*}\vspace{-5pt}
@@ -78,23 +75,23 @@
 
 \newcommand{\resumeProjectHeading}[2]{
   \vspace{-1pt}\item
-    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+    \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
       \textbf{#1} & \textit{\small #2} \\
     \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeRole}[2]{
   \vspace{2pt}
-  \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+  \begin{tabular*}{\linewidth}{l@{\extracolsep{\fill}}r}
     \textit{\small#1} & \textit{\small #2} \\
   \end{tabular*}\vspace{-5pt}
 }
 
 \newcommand{\resumeSubItem}[2]{\resumeItem{#1}{#2}\vspace{-4pt}}
 
-\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\labelitemii}{\textbullet}
 
-\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=*]}
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0pt, label={}]}
 \newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
 \newcommand{\resumeItemListStart}{\begin{itemize}}
 \newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-5pt}}
@@ -107,13 +104,9 @@
 
 %----------HEADING-----------------
 \begin{tabular*}{\textwidth}{l@{\extracolsep{\fill}}r}
-  \textbf{{\LARGE 
-     Sahand Amini 
-      \href{mailto:sahandaamini@gmail.com}{\faEnvelope}
-      \href{https://www.linkedin.com/in/sahandamini/}{\faLinkedinSquare}
-  }}
-  & \href{https://sahandamini.com/}{sahandamini.com}\\
-  Philadelphia, PA & (504) 401-1502\\
+  \textbf{\LARGE Sahand Amini} & \href{https://sahandamini.com/}{sahandamini.com}\\
+  Philadelphia, PA & \href{mailto:sahandaamini@gmail.com}{sahandaamini@gmail.com}\\
+  (504) 401-1502 & \href{https://www.linkedin.com/in/sahandamini/}{linkedin.com/in/sahandamini}\\
   Work Auth: US Citizen\\
 \end{tabular*}
 \vspace{-5pt}
@@ -130,7 +123,7 @@ Full-stack developer with 5 years of professional experience working on backend 
 \section{Skills}
 	\resumeSubHeadingListStart
 	\resumeSubItem{Languages}{Java, C\#, JavaScript, TypeScript, SQL, HTML, CSS, Bash}
-    \resumeSubItem{Frameworks}{Spring Boot, JUnit, React, Next.js, TanStack Start, Astro, Node.js, Tailwind, Playwright, Vitest, ASP.NET}
+    \resumeSubItem{Frameworks}{Spring Boot, JUnit, React, Next.js, TanStack Start, Astro, Node.js, Tailwind CSS, Playwright, Vitest, ASP.NET}
     \resumeSubItem{DevOps}{AWS, Docker, Terraform, Jenkins, GitHub Actions, Cloudflare Workers}
     \resumeSubItem{Tools \& Technologies}{Git, Kafka, REST APIs}
     \resumeSubHeadingListEnd
@@ -142,11 +135,11 @@ Full-stack developer with 5 years of professional experience working on backend 
   \resumeSubHeadingListStart
     \resumeSubheading
     {{JPMorgan Chase}}{Wilmington, DE}
-    {Software Engineer}{Nov 2024 - Current}
+    {Software Engineer}{Nov 2024 -- Present}
     \resumeItemListStart
         \resumeItemWithoutTitle{Contributed to greenfield development of an event-driven microservice system for the collections platform, replacing a 10-year legacy application using Java, Spring Boot, PostgreSQL, AWS, Kafka, Terraform, Docker, and JUnit}
         \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
-            \item{Enhanced infrastructure by implementing full test suites for 1M+ test cases, blue green pipelines, fixing multi-region functionality, and general improvements/modernizations }
+            \item{Enhanced infrastructure by implementing full test suites for 1M+ test cases, blue-green pipelines, fixing multi-region functionality, and general improvements/modernizations }
             \item{Led time-critical recovery of 50,000+ Kafka events in 4 hours following a production outage and message retention expiration; developed Python replay automation and reconciled events using Splunk and audit records, mitigating escalating data consistency risks from incoming transactions}
         \end{description}
     \resumeItemListEnd
@@ -154,7 +147,7 @@ Full-stack developer with 5 years of professional experience working on backend 
     
     \resumeSubheading
     {{Ochsner Health}}{New Orleans, LA}
-    {Software Engineer}{Nov 2021 - Nov 2024}
+    {Software Engineer}{Nov 2021 -- Nov 2024}
     \resumeItemListStart
         \resumeItemWithoutTitle{Built and owned the C\# backend for Ochsner Digital Medicine's enrollment portal}
         \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
@@ -163,11 +156,11 @@ Full-stack developer with 5 years of professional experience working on backend 
             \item{Built test suites for the app and portal with 100\% coverage, reducing QA time from days to minutes}
         \end{description}
 
-        \resumeItemWithoutTitle{Spearheaded backend development for Inhaler Tracking, achieving first ever FDA-approved device in company history}
+        \resumeItemWithoutTitle{Spearheaded backend development for Inhaler Tracking, achieving first-ever FDA-approved device in company history}
         
         \resumeItemWithoutTitle{Unified two C\# projects, Aging At Home \& Connected Home, into new app Connected Living}
         \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
-            \item{Restructured a 5,000+ LOC controller file into 90+ modular controllers, migrated from ASP.NET MVC to WebAPI}
+            \item{Restructured a 5,000+ LOC controller file into 90+ modular controllers, migrated from ASP.NET MVC to Web API}
         \end{description}
     \resumeItemListEnd
     \vspace{3pt}
@@ -177,17 +170,17 @@ Full-stack developer with 5 years of professional experience working on backend 
     {Software Engineer Intern}{Summer 2019 \& 2020}
     \resumeItemListStart
         \resumeItemWithoutTitle{2020: Developed a Node.js service that abstracted multiple REST APIs into a unified GraphQL endpoint}
-        \resumeItemWithoutTitle{2019: Updated Kubernetes microservices to populate necessary static \& dynamic Hashicorp Vault secrets}  
+        \resumeItemWithoutTitle{2019: Updated Kubernetes microservices to populate necessary static \& dynamic HashiCorp Vault secrets}  
     \resumeItemListEnd
     \vspace{3pt}
 
     \resumeSubheading
     {{Arizona State University}}{Tempe, AZ}
-    {Teaching Assistant}{Aug 2018 - Dec 2018}
+    {Teaching Assistant}{Aug 2018 -- Dec 2018}
     \resumeItemListStart
         \resumeItemWithoutTitle{Supported 250+ students in the intro Java course through tutoring, labs, and review sessions}
     \resumeItemListEnd
-    \resumeRole{Scientific Software Engineer, HPC}{May 2018 - Aug 2018}
+    \resumeRole{Scientific Software Engineer, HPC}{May 2018 -- Aug 2018}
     \resumeItemListStart
         \resumeItemWithoutTitle{Improved molecular dynamics simulation benchmarks by 31\%+ with MPI \& OpenMP; presented at PEARC (NIH-funded)}
     \resumeItemListEnd
@@ -220,13 +213,13 @@ Full-stack developer with 5 years of professional experience working on backend 
   \resumeSubHeadingListStart
     \resumeSubheading
       {{Arizona State University}}{Tempe, AZ}
-      {B.S. in \textbf{Computer Science};  GPA: 3.43/4.0}{Aug 2017 - May 2021}
+      {B.S. in \textbf{Computer Science};  GPA: 3.43/4.0}{Aug 2017 -- May 2021}
         \resumeItemListStart
         \resumeItem{Capstone}{Publication Repository for NASA JPL's Psyche Mission}
         \begin{description}[noitemsep, wide=2pt, font=$\cdot$, leftmargin=\dimexpr\labelwidth + 2\labelsep\relax]
             \item{Built a searchable archive of Psyche Mission papers in a six-member team using MongoDB, Express, React, and AWS S3}
         \end{description}
-        \resumeItem{{National Merit Finalist}}{Received full ride scholarship to Arizona State University}
+        \resumeItem{{National Merit Finalist}}{Received full-ride scholarship to Arizona State University}
         \resumeItemWithoutTitle{Studied abroad in Barcelona, Spain during Fall 2019 semester}
         \resumeItemListEnd
      
