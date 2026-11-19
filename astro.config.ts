@@ -5,6 +5,9 @@ import { defineConfig } from 'astro/config'
 
 import { resumeDevServer } from './scripts/resume-dev-server'
 
+// `||`, because an empty APP_PORT gives 0, which means a random port.
+const port = Number(process.env.APP_PORT || 3000)
+
 export default defineConfig({
 	site: 'https://sahandamini.com',
 	output: 'static',
@@ -17,12 +20,15 @@ export default defineConfig({
 	integrations: [sitemap(), resumeDevServer()],
 	server: {
 		host: '127.0.0.1',
-		port: Number(process.env.APP_PORT ?? 3000),
+		port,
 		// Caddy and the Pitchfork proxy serve the app on *.lab.sahandamini.dev.
 		allowedHosts: ['.lab.sahandamini.dev'],
 	},
 	vite: {
 		plugins: [tailwindcss()],
-		server: { strictPort: true },
+		// A config change restarts the server. Astro then reads the port from the
+		// old socket, and an overlapping restart reads none, so Vite falls back to
+		// 5173 without this setting.
+		server: { port, strictPort: true },
 	},
 })
